@@ -141,6 +141,7 @@ function App() {
     setCurrentPage(signup)
   }
 
+console.log({ username })
   function handleUsernameChange(e) {
     setUsername(e.target.value)
   }
@@ -155,6 +156,8 @@ function App() {
 
   function handleSignupClick(e) {
     e.preventDefault()
+    console.log({ username })
+    console.log({ password })
     fetch('/users', {
       method: 'POST',
       mode: 'no-cors',
@@ -162,8 +165,8 @@ function App() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: `${username}`,
-        password: `${password}`,
+        username,
+        password,
         // password_confirmation: passwordConfirmation,
       })})
       .then(res => res.json())
