@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   def create
-    byebug
-    user = User.create(user_params)
+    # byebug
+    user = User.create(username: params[:username], password: params[:password])
     if user.valid?
       session[:user_id] = user.id
       render json: user, status: :created
@@ -27,8 +27,8 @@ class UsersController < ApplicationController
 
   private
 
-  def user_params
-    params.permit(:username, :password, :password_digest, :password_confirmation)
-  end
+  # def user_params
+  #   params.permit(:username, :password, :password_digest, :password_confirmation)
+  # end
 
 end
