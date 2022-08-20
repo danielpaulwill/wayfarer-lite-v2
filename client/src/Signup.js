@@ -18,7 +18,7 @@ function Signup({ handleSignupClick, handleLoginClick, onUsername, onPassword, o
         <br></br>
         <input className="textInput" type="password" placeholder="password" onChange={e => setPassword(e.target.value)}></input>
         <br></br>
-        <input className="textInput" type="password" placeholder="confirm password" onChange={onPasswordConfirm}></input>
+        {/* <input className="textInput" type="password" placeholder="confirm password" onChange={onPasswordConfirm}></input> */}
         <br></br>
         <br></br>
         <br></br>

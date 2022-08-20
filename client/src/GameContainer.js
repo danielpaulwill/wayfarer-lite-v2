@@ -31,13 +31,13 @@ function GameContainer() {
   
 
 
-  const [currentPage, setCurrentPage] = useState(chooseYourLocation)
+  const [currentPage, setCurrentPage] = useState(gameStart)
   const [characterName, setCharacterName] = useState('...')
   const [characterAvatar, setCharacterAvatar] = useState(blankAvatar)
 
 
   function handleStartClick(e) {
-    setCurrentPage(ConfirmGameBegin)
+    setCurrentPage(chooseYourCharacter)
   }
 
   function handleNameChange(e) {
