@@ -34,7 +34,7 @@ function App() {
   const signup = <Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} /*onUsername={handleUsernameChange} onPassword={handlePasswordChange}*/ onPasswordConfirm={handlePasswordConfirmationChange} />
   const gameContainer = <GameContainer/>
 
-  const [currentPage, setCurrentPage] = useState(gameContainer)
+  const [currentPage, setCurrentPage] = useState(signup)
 
 
 

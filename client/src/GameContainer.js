@@ -22,7 +22,7 @@ function GameContainer() {
 
   const confirmGameBegin = <ConfirmGameBegin onGameBegin={handleMapView} />
   const gameStart = <GameStart handleClick={handleStartClick} />
-  const chooseYourCharacter = <ChooseYourCharacter handleOnChange={handleNameChange} handleOnClick={handleAvatarClick} onCharacterConfirm={handleCharacterConfirm} />
+  const chooseYourCharacter = <ChooseYourCharacter onChange={handleNameChange} onClick={handleAvatarClick} onCharacterConfirm={handleCharacterConfirm} />
   // const forest = <Forest islandMap={handleMapView} />
   // const volcano = <Volcano islandMap={handleMapView} />
   const location = <Location currentLocation={currentLocation} onEventSelect={handleEventSelect} />
@@ -31,7 +31,7 @@ function GameContainer() {
   
 
 
-  const [currentPage, setCurrentPage] = useState(gameStart)
+  const [currentPage, setCurrentPage] = useState(chooseYourCharacter)
   const [characterName, setCharacterName] = useState('...')
   const [characterAvatar, setCharacterAvatar] = useState(blankAvatar)
 
@@ -48,10 +48,11 @@ function GameContainer() {
     setCharacterAvatar(e.target.src)
   }
 
-  function handleCharacterConfirm(e) {
-    console.log(e.target)
+  function handleCharacterConfirm(chooseCharacterName, chooseCharacterAvatar) {
+    
+    console.log({ chooseCharacterName, chooseCharacterAvatar })
     // POST to the server the character name, avatar, stats, etc.
-    setCurrentPage(ConfirmGameBegin)
+    // setCurrentPage(confirmGameBegin)
   }
 
   function handleMapView() {
