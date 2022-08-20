@@ -1,17 +1,17 @@
 import React from "react";
 
-function Signup({ handleSignupClick, handleLoginClick }) {
+function Signup({ handleSignupClick, handleLoginClick, onUsername, onPassword, onPasswordConfirm }) {
 
   return (
     <div id="welcome">
       <h3>Signup</h3>
       <form>
-        <input className="textInput" type="text" placeholder="username"></input>
+        <input className="textInput" type="text" placeholder="username" onChange={onUsername}></input>
         <br></br>
         <br></br>
-        <input className="textInput" type="password" placeholder="password"></input>
+        <input className="textInput" type="password" placeholder="password" onChange={onPassword}></input>
         <br></br>
-        <input className="textInput" type="password" placeholder="confirm password"></input>
+        <input className="textInput" type="password" placeholder="confirm password" onChange={onPasswordConfirm}></input>
         <br></br>
         <br></br>
         <br></br>

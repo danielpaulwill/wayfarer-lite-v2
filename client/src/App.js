@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import './App.css';
 import LandingPage from "./LandingPage";
 import Login from "./Login";
@@ -28,12 +28,35 @@ function App() {
   
   const landingPage = <LandingPage handleClick={handleWelcomeClick}/>
   const login = <Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick}/ >
-  const signup = <Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} />
+  const signup = <Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onUsername={handleUsernameChange} onPassword={handlePasswordChange} onPasswordConfirm={handlePasswordConfirmationChange} />
   const gameContainer = <GameContainer/>
 
-  const [currentPage, setCurrentPage] = useState(landingPage)
+  const [currentPage, setCurrentPage] = useState(signup)
 
-  const axe = {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+
+
+{/* AUTOMATIC LOGIN USING SESSION */}
+  {/* const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // auto-login
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []); */}
+
+{/* if (!user) return <Login onLogin={setUser} />; */}
+
+
+
+
+
+  {/* const axe = {
     name: "Axe",
     quantity: 1,
     category: "weapon",
@@ -62,7 +85,7 @@ function App() {
     image: "https://lh3.googleusercontent.com/uinm4VWdW-hdckNoYJk6eQVcDYkXkRUJ3Eqq1jMnFGNluhAc7hdPKNIlh4eZBwMwlvrIp04KNzr2qEtLi7no6EgNOsunrj0RlRC8Tj5yGqTz0Q1SxIJ1TkSoI2MhOboE1Gk_2EtMh7KItHZpsLuKEhI9Y5UJvv5pb5xrabhQ5CmLYkN8nSNHc595DdLN3HabyGpzakdJKy6oobAEKBPHX_KqU38ZRRFWfEyyNJGuBDJNt0XeGB54zN-B2-oXfFb6T-P5CTbJWe-hfUVgE7VRNbLz7VK9ENTcHXcKeOBF5qrJHuHRyiNZorKtlfZ7wlo_wlmo5beoMaqaEYIa1PUvXmRaLIMxEzHZ89vqju0RcKe4NOhykkpnw4yZB4hu7h6ZR_InWEct8khUkxHwjthOG98AdkgdNHVgxUAaUyROeCp9fz85DLA1GfJXMTwaw0f8PFhranJOrEzMGgxAqvUS7copqajsU6Ce-wZ4xLEv6fhH0OwCfgeHKmTUI2KFNOmp-x6YAJsCYSdBMy_BC15tXoUh8TKRyCnHFRPX0NmPBaFkHltgbSLM-NT-tzD-1ovr2k7ooiqpfTtELqSIGMEYBIpMMjKBzKhwWAvzv0YAfi_r7s2VAUOLfWePwDe-0rGyUe2fFlzLu4BiUD2fe1eb4ZiH2UR-kgLanQID1b_oQBp2E75FBs1f9uaBJWqXy3lG6pnw0rtqJBsMc-zaa4jur4oEFmvcKI1zqmHdt7n5NWPCWDzCagamyPQ1juoMhCojsmEs3yZlBXw_MQNlbm5dSH0-RL8vO-MEJGc=s424-no?authuser=0"
   }
 
-  const currentItems = [axe, potion, treasure, helmet]
+  const currentItems = [axe, potion, treasure, helmet] */}
   
 
   function handleNameChange(e) {
@@ -106,7 +129,7 @@ function App() {
   }
 
   function handleWelcomeClick() {
-    setCurrentPage(login)
+    setCurrentPage(signup)
   }
 
   function handleLoginClick(e) {
@@ -118,10 +141,36 @@ function App() {
     setCurrentPage(signup)
   }
 
+  function handleUsernameChange(e) {
+    setUsername(e.target.value)
+  }
+
+  function handlePasswordChange(e){
+    setPassword(e.target.value)
+  }
+
+  function handlePasswordConfirmationChange(e){
+    setPasswordConfirmation(e.target.value)
+  }
+
   function handleSignupClick(e) {
     e.preventDefault()
-    console.log(e.target)
-  }
+    fetch('/users', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: `${username}`,
+        password: `${password}`,
+        // password_confirmation: passwordConfirmation,
+      })})
+      .then(res => res.json())
+      // }}
+      .then((data) => console.log(data))
+      };
+  
 
   function handleSignupLoginClick() {
     setCurrentPage(login)
