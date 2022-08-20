@@ -4,6 +4,7 @@ import LandingPage from "./LandingPage";
 import Login from "./Login";
 import Signup from "./Signup";
 import GameContainer from "./GameContainer"
+import Navbar from "./Navbar";
 // import ChooseYourAdventurer from "./ChooseYourAdventurer";
 // import Adventure from "./Adventure";
 
@@ -35,11 +36,11 @@ function App() {
   const gameContainer = <GameContainer/>
 
   const [currentPage, setCurrentPage] = useState(signup)
+  const [user, setUser] = useState(null);
 
+  console.log({user})
 
-
-{/* AUTOMATIC LOGIN USING SESSION */}
-  {/* const [user, setUser] = useState(null);
+// AUTOMATIC LOGIN USING SESSION
 
   useEffect(() => {
     // auto-login
@@ -48,7 +49,7 @@ function App() {
         r.json().then((user) => setUser(user));
       }
     });
-  }, []); */}
+  }, []);
 
 {/* if (!user) return <Login onLogin={setUser} />; */}
 
@@ -182,6 +183,7 @@ function App() {
 
   return (
     <div>
+      <Navbar user={user}/>
       {currentPage}
     </div>
   );
