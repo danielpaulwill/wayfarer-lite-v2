@@ -31,7 +31,7 @@ function App() {
   const signup = <Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} />
   const gameContainer = <GameContainer/>
 
-  const [currentPage, setCurrentPage] = useState(gameContainer)
+  const [currentPage, setCurrentPage] = useState(landingPage)
 
   const axe = {
     name: "Axe",
