@@ -35,7 +35,7 @@ function App() {
   const landingPage = <LandingPage handleClick={handleWelcomeClick}/>
   const login = <Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} setUser={setUser} />
   const signup = <Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />
-  const gameContainer = <GameContainer/>
+  const gameContainer = <GameContainer user={user} />
 
   const [currentPage, setCurrentPage] = useState(signup)
 
