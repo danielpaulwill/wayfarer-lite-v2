@@ -38,18 +38,19 @@ function App() {
   const [currentPage, setCurrentPage] = useState(signup)
   const [user, setUser] = useState(null);
 
-  console.log({user})
+  // console.log({user})
 
 // AUTOMATIC LOGIN USING SESSION
 
-  useEffect(() => {
-    // auto-login
-    fetch("/me").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   // auto-login
+  //   fetch("/me").then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((user) => setUser(user));
+  //     }
+  //   });
+  // }, []);
+
 
 {/* if (!user) return <Login onLogin={setUser} />; */}
 
@@ -156,11 +157,9 @@ function App() {
 
   // console.log({ username })
   function handleSignupClick(signupUsername, signupPassword) {
-    console.log("username before:", signupUsername)
-    console.log("password before:", signupPassword)
     fetch('/users', {
       method: 'POST',
-      mode: 'no-cors',
+      // mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -172,8 +171,6 @@ function App() {
       .then(res => res.json())
       // }}
       .then((data) => console.log(data))
-      console.log("username after:", signupUsername)
-      console.log("password after:", signupPassword)
       };
   
 
