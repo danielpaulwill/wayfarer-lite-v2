@@ -31,7 +31,7 @@ function GameContainer() {
   
 
 
-  const [currentPage, setCurrentPage] = useState(chooseYourCharacter)
+  const [currentPage, setCurrentPage] = useState(gameStart)
   const [characterName, setCharacterName] = useState('...')
   const [characterAvatar, setCharacterAvatar] = useState(blankAvatar)
 

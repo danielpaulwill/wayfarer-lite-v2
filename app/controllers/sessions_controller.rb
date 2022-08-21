@@ -7,11 +7,10 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       render json: user, status: :created
     else
-      user = User.first
+      # user = User.first
       render json: { errors: user.errors.full_messages }, status: :unauthorized
     end
   end
-
 
   def destroy
     user = User.find_by(id: session[:user_id])

@@ -29,16 +29,17 @@ function App() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
-  
+  const [errors, setErrors] = useState('')
+  const [user, setUser] = useState(null);
+
   const landingPage = <LandingPage handleClick={handleWelcomeClick}/>
-  const login = <Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} />
-  const signup = <Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} /*onUsername={handleUsernameChange} onPassword={handlePasswordChange}*/ onPasswordConfirm={handlePasswordConfirmationChange} />
+  const login = <Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} setUser={setUser} />
+  const signup = <Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />
   const gameContainer = <GameContainer/>
 
   const [currentPage, setCurrentPage] = useState(signup)
-  const [user, setUser] = useState(null);
 
-  // console.log({user})
+  console.log({user})
 
 // AUTOMATIC LOGIN USING SESSION
 
@@ -137,6 +138,14 @@ function App() {
   function handleLoginClick(e) {
     e.preventDefault()
     console.log(e.target)
+
+  //   fetch("/me").then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((user) => setUser(user));
+  //     }
+  //   });
+  // }, []);
+
   }
 
   function handleLoginSignupClick() {
@@ -168,19 +177,23 @@ function App() {
         password: signupPassword,
         // password_confirmation: passwordConfirmation,
       })})
-      .then(res => res.json())
-      // }}
-      .then((data) => console.log(data))
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((data) => console.log(data));
+          setCurrentPage(gameContainer)
+        } else {
+          res.json().then((err) => setErrors(err.errors))
+        }})
+        
       };
   
-
   function handleSignupLoginClick() {
     setCurrentPage(login)
   }
 
   return (
     <div>
-      <Navbar user={user}/>
+      <Navbar user={user} onClick={handleSignupLoginClick} />
       {currentPage}
     </div>
   );

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function Signup({ handleSignupClick, handleLoginClick, onUsername, onPassword, onPasswordConfirm }) {
+function Signup({ handleSignupClick, handleLoginClick, errors, onUsername, onPassword, onPasswordConfirm }) {
   const [signupUsername, setUsername] = useState('')
   const [signupPassword, setPassword] = useState('')
 
@@ -24,6 +24,7 @@ function Signup({ handleSignupClick, handleLoginClick, onUsername, onPassword, o
         <br></br>
         <button className="normalButton" onClick={onSignupClick}>Sign up</button>
       </form>
+      <p className={(errors === '') ? 'errors2' : 'errors1'}>{errors}</p>
       <br></br>
       <br></br>
       <br></br>
