@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   def create
     # byebug
-    user = User.create(username: params[:username], password: params[:password])
+    user = User.create(user_params)
     if user.valid?
       session[:user_id] = user.id
       render json: user, status: :created
@@ -25,10 +25,18 @@ class UsersController < ApplicationController
     render json: users
   end
 
+  def destroy
+    user = User.find_by(id: params[:id])
+    user.destroy
+    render json: "deleted", status: :accepted
+  end
+
+
+
   private
 
-  # def user_params
-  #   params.permit(:username, :password, :password_digest, :password_confirmation)
-  # end
+  def user_params
+    params.permit(:username, :password, :password_digest, :password_confirmation)
+  end
 
 end

@@ -179,7 +179,7 @@ function App() {
       })})
       .then((res) => {
         if (res.ok) {
-          res.json().then((data) => console.log(data));
+          res.json().then((data) => setUser(data));
           setCurrentPage(gameContainer)
         } else {
           res.json().then((err) => setErrors(err.errors))

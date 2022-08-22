@@ -5,8 +5,6 @@ import GameStart from "./GameStart";
 import ChooseYourCharacter from "./ChooseYourCharacter";
 import ConfirmGameBegin from "./ConfirmGameBegin";
 import ChooseYourLocation from "./ChooseYourLocation";
-import Forest from "./Forest";
-import Volcano from "./Volcano";
 import Location from "./Location";
 
 function GameContainer({ user }) {
