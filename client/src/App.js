@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Route, Routes } from "react-router-dom"
 import './App.css';
 import LandingPage from "./LandingPage";
 import Login from "./Login";
@@ -32,25 +33,22 @@ function App() {
   const [errors, setErrors] = useState('')
   const [user, setUser] = useState(null);
 
-  const landingPage = <LandingPage handleClick={handleWelcomeClick}/>
-  const login = <Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} setUser={setUser} />
-  const signup = <Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />
+  const landingPage = <LandingPage /* handleClick={handleWelcomeClick} */ />
+  const login = <Login handleLoginClick={handleLoginClick} /* handleSignupClick={handleLoginSignupClick} */ setUser={setUser} />
+  // const signup = <Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />
   const gameContainer = <GameContainer user={user} />
 
-  const [currentPage, setCurrentPage] = useState(signup)
+  const [currentPage, setCurrentPage] = useState(login)
 
   console.log({user})
 
-// AUTOMATIC LOGIN USING SESSION
-
-  // useEffect(() => {
-  //   // auto-login
-  //   fetch("/me").then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((user) => setUser(user));
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+  fetch("/me").then((res) => {
+    if (res.ok) {
+      res.json().then((user) => setUser(user));
+    }
+  });
+}, []);
 
 
 {/* if (!user) return <Login onLogin={setUser} />; */}
@@ -131,26 +129,19 @@ function App() {
     setLuck(Math.floor(Math.random() * 100))
   } */}
 
-  function handleWelcomeClick() {
-    setCurrentPage(signup)
-  }
+  // function handleWelcomeClick() {
+  //   setCurrentPage(signup)
+  // }
 
   function handleLoginClick(e) {
     e.preventDefault()
     console.log(e.target)
 
-  //   fetch("/me").then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((user) => setUser(user));
-  //     }
-  //   });
-  // }, []);
-
   }
 
-  function handleLoginSignupClick() {
-    setCurrentPage(signup)
-  }
+  // function handleLoginSignupClick() {
+  //   setCurrentPage(signup)
+  // }
 
   // function handleUsernameChange(e) {
   //   setUsername(e.target.value)
@@ -194,6 +185,12 @@ function App() {
   return (
     <div>
       <Navbar user={user} onClick={handleSignupLoginClick} />
+      <Routes>
+        <Route path="/signup">
+          <Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />
+        </Route>
+
+      </Routes>
       {currentPage}
     </div>
   );
