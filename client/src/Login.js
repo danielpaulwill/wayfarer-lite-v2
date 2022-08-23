@@ -4,14 +4,10 @@ function Login({ handleLoginClick, handleSignupClick, setUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  console.log({ username })
-  console.log({ password })
-
   function handleSubmit(e) {
     e.preventDefault();
     handleLoginClick(username, password)
   }
-  
 
   return (
     <div id="welcome">

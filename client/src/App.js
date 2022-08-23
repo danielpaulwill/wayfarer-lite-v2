@@ -40,7 +40,8 @@ function App() {
 
   // const [currentPage, setCurrentPage] = useState(login)
 
-  console.log({errors})
+  console.log({ errors })
+  console.log({ user })
 
   useEffect(() => {
   fetch("/me").then((res) => {
