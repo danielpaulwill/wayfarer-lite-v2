@@ -9,17 +9,7 @@ function Login({ handleLoginClick, handleSignupClick, setUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then((user) => setUser(user));
-      }
-    });
+    handleLoginClick(username, password)
   }
   
 

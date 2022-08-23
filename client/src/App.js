@@ -40,13 +40,13 @@ function App() {
 
   // const [currentPage, setCurrentPage] = useState(login)
 
-  console.log({user})
+  console.log({errors})
 
   useEffect(() => {
   fetch("/me").then((res) => {
     if (res.ok) {
       res.json().then((user) => setUser(user));
-    }
+    } else {res.json().then((err) => setErrors(err.errors))}
   });
 }, []);
 
@@ -134,10 +134,19 @@ function App() {
     navigate('/signup')
   }
 
-  function handleLoginClick(e) {
-    e.preventDefault()
-    console.log(e.target)
-
+  function handleLoginClick(username, password) {
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((user) => setUser(user));
+        navigate('/play')
+      }
+    });
   }
 
   function handleLoginSignupClick() {
@@ -189,7 +198,7 @@ function App() {
       <Routes>
         <Route path='welcome' element={<LandingPage handleClick={handleWelcomeClick}/>} />
         <Route path="signup" element={<Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />} />
-        <Route path="login" element={<Login /*handleLoginClick={handleLoginClick}*/ handleSignupClick={handleLoginSignupClick} setUser={setUser} />} />
+        <Route path="login" element={<Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} setUser={setUser} />} />
         <Route path='play' element={<GameContainer />} />
       </Routes>
     </div>
