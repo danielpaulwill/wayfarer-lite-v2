@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useNavigate } from "react-router-dom"
 import './App.css';
 import LandingPage from "./LandingPage";
 import Login from "./Login";
@@ -33,12 +33,12 @@ function App() {
   const [errors, setErrors] = useState('')
   const [user, setUser] = useState(null);
 
-  const landingPage = <LandingPage /* handleClick={handleWelcomeClick} */ />
-  const login = <Login handleLoginClick={handleLoginClick} /* handleSignupClick={handleLoginSignupClick} */ setUser={setUser} />
-  // const signup = <Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />
+  let navigate = useNavigate()
+
+  // const login = <Login />
   const gameContainer = <GameContainer user={user} />
 
-  const [currentPage, setCurrentPage] = useState(login)
+  // const [currentPage, setCurrentPage] = useState(login)
 
   console.log({user})
 
@@ -129,9 +129,10 @@ function App() {
     setLuck(Math.floor(Math.random() * 100))
   } */}
 
-  // function handleWelcomeClick() {
-  //   setCurrentPage(signup)
-  // }
+  function handleWelcomeClick() {
+    // setCurrentPage(signup)
+    navigate('/signup')
+  }
 
   function handleLoginClick(e) {
     e.preventDefault()
@@ -139,9 +140,9 @@ function App() {
 
   }
 
-  // function handleLoginSignupClick() {
-  //   setCurrentPage(signup)
-  // }
+  function handleLoginSignupClick() {
+    navigate('/signup')
+  }
 
   // function handleUsernameChange(e) {
   //   setUsername(e.target.value)
@@ -171,7 +172,7 @@ function App() {
       .then((res) => {
         if (res.ok) {
           res.json().then((data) => setUser(data));
-          setCurrentPage(gameContainer)
+          navigate('/play')
         } else {
           res.json().then((err) => setErrors(err.errors))
         }})
@@ -179,19 +180,18 @@ function App() {
       };
   
   function handleSignupLoginClick() {
-    setCurrentPage(login)
+    navigate('/login')
   }
 
   return (
     <div>
       <Navbar user={user} onClick={handleSignupLoginClick} />
       <Routes>
-        <Route path="/signup">
-          <Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />
-        </Route>
-
+        <Route path='welcome' element={<LandingPage handleClick={handleWelcomeClick}/>} />
+        <Route path="signup" element={<Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />} />
+        <Route path="login" element={<Login /*handleLoginClick={handleLoginClick}*/ handleSignupClick={handleLoginSignupClick} setUser={setUser} />} />
+        <Route path='play' element={<GameContainer />} />
       </Routes>
-      {currentPage}
     </div>
   );
 }
