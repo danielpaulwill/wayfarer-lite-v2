@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       session.destroy
       render json: [], status: :no_content
     else
-      user = User.first
+      # user = User.first
       render json: { errors: user.errors.full_messages }, status: :unauthorized
     end
   end

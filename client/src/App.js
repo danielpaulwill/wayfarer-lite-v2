@@ -46,12 +46,16 @@ function App() {
   fetch("/me").then((res) => {
     if (res.ok) {
       res.json().then((user) => setUser(user));
-    } else {res.json().then((err) => setErrors(err.errors))}
+      navigate('/play')
+    } else {
+      res.json().then((err) => setErrors(err.errors))
+      navigate('/welcome')
+    }
   });
 }, []);
 
 
-{/* if (!user) return <Login onLogin={setUser} />; */}
+
 
 
 
@@ -130,7 +134,6 @@ function App() {
   } */}
 
   function handleWelcomeClick() {
-    // setCurrentPage(signup)
     navigate('/signup')
   }
 
@@ -165,7 +168,6 @@ function App() {
     setPasswordConfirmation(e.target.value)
   }
 
-  // console.log({ username })
   function handleSignupClick(signupUsername, signupPassword) {
     fetch('/users', {
       method: 'POST',
@@ -192,9 +194,18 @@ function App() {
     navigate('/login')
   }
 
+  function handleLogout() {
+    fetch("/logout", {
+      method: "DELETE" 
+    }).then((res) => {
+      if (res.ok) {
+        setUser(null);
+      }});
+  }
+
   return (
     <div>
-      <Navbar user={user} onClick={handleSignupLoginClick} />
+      <Navbar user={user} onLogin={handleSignupLoginClick} onLogout={handleLogout}/>
       <Routes>
         <Route path='welcome' element={<LandingPage handleClick={handleWelcomeClick}/>} />
         <Route path="signup" element={<Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />} />
