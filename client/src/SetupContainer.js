@@ -15,7 +15,7 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
 
   const [currentPage, setCurrentPage] = useState(gameStart)
 
-
+  console.log("SetupContainer User: ", user)
   function handleStartClick(e) {
     setCurrentPage(chooseYourCharacter)
   }
@@ -31,7 +31,7 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        user_id: user.id,
+        // user_id: user.id,
         name: characterName,
         avatar: characterAvatar,
       })})

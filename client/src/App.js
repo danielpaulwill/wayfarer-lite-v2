@@ -201,7 +201,7 @@ function handleMapView() {
         <Route path='welcome' element={<LandingPage handleClick={handleWelcomeClick}/>} />
         <Route path="signup" element={<Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />} />
         <Route path="login" element={<Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} setUser={setUser} />} />
-        <Route path="setup" element={<SetupContainer handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleMapView={handleMapView} characterName={characterName} characterAvatar={characterAvatar} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />} />
+        <Route path="setup" element={<SetupContainer user={user} handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleMapView={handleMapView} characterName={characterName} characterAvatar={characterAvatar} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />} />
         <Route path='play' element={<GameContainer characterName={characterName} characterAvatar={characterAvatar} />} />
       </Routes>
     </div>
