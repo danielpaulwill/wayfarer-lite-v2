@@ -14,6 +14,19 @@
   align-content: middle;
 }
 
+#navbarText {
+  margin: auto 10px auto 0;
+}
+
+#navbarButton {
+  color: #FFF;
+  background-color: #000;
+  border: 3px solid #FFF;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
 #welcome {
   color: rgb(255, 255, 255);
   margin: auto auto;
@@ -94,7 +107,7 @@
 
 #characterSidebar {
   width: 20%;
-  height: 95vh;
+  height: 90vh;
   color: #FFF;
   text-align: center;
   padding-top: 20px;
@@ -109,7 +122,7 @@
 
 #itemsSidebar {
   width: 20%;
-  height: 95vh;
+  height: 90vh;
   color: #FFF;
   text-align: center;
   padding-top: 20px;
@@ -148,7 +161,7 @@
 .adventureMain {
   color: #FFF;
   width: 54%;
-  height: 95vh;
+  height: 90vh;
   text-align: center;
   padding-top: 20px;
   display: flex;
@@ -262,6 +275,10 @@
 
   .errors2 {
     display: none;
+  }
+
+  alert {
+
   }
 
 
