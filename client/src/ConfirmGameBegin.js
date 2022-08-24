@@ -5,9 +5,7 @@ function ConfirmGameBegin({ onGameBegin }) {
   function handleOnClick() {
     
 /*
-  // JUST AN EXAMPLE, CAN GET RID OF "data"
-  const data = { username: 'example' };
-
+  
   // Use the session user_id to find the character_id to .create the locations
   fetch('xxx', {
     method: 'POST',

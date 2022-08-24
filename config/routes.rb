@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :attributes
+  resources :character_attributes
   resources :characters
   resources :events
   resources :items

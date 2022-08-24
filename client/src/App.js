@@ -52,7 +52,7 @@ function App() {
     if (res.ok) {
       res.json().then((user) => setUser(user));
       navigate('/play')
-      alert("Welcome back to Wayfarer!");
+      alert("Welcome back to Wayfarer! Please select a location to pick up where you left off");
     } else {
       res.json().then((err) => setErrors(err.errors))
       navigate('/welcome')

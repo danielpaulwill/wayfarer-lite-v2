@@ -30,7 +30,8 @@ function GameContainer({ user, characterName, characterAvatar }) {
 
 
   function handleLocationSelect(e) {
-    setCurrentPage(location)
+    console.log(e.target.value)
+    // setCurrentPage(location)
     // (e.target.value) === "forest" ? setCurrentPage(forest) : setCurrentPage(volcano)
   }
 

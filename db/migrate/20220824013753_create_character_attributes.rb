@@ -1,6 +1,6 @@
-class CreateAttributes < ActiveRecord::Migration[6.1]
+class CreateCharacterAttributes < ActiveRecord::Migration[6.1]
   def change
-    create_table :attributes do |t|
+    create_table :character_attributes do |t|
       t.integer :character_id
       t.string :name
       t.integer :quantity
