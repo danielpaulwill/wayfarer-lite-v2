@@ -7,7 +7,7 @@ import ConfirmGameBegin from "./ConfirmGameBegin";
 import ChooseYourLocation from "./ChooseYourLocation";
 import Location from "./Location";
 
-function GameContainer({ user, characterName, characterAvatar }) {
+function GameContainer({ user, characterName, characterAvatar, archerAvatar, mageAvatar, warriorAvatar }) {
   
   let forest = {
     name: "Forest",
@@ -20,7 +20,7 @@ function GameContainer({ user, characterName, characterAvatar }) {
   // const forest = <Forest islandMap={handleMapView} />
   // const volcano = <Volcano islandMap={handleMapView} />
   const location = <Location currentLocation={currentLocation} onEventSelect={handleEventSelect} />
-  const chooseYourLocation = <ChooseYourLocation onLocationSelect={handleLocationSelect} />
+  const chooseYourLocation = <ChooseYourLocation onLocationSelect={handleLocationSelect} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />
 
   
 

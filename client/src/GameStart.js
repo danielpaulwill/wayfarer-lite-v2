@@ -5,8 +5,6 @@ import ItemsSidebar from "./ItemsSidebar";
 function GameStart({ handleClick, characterAvatar, characterName }) {
 
   return (
-    <div id="gameContainer">
-      <CharacterSidebar avatar={characterAvatar} name={characterName}/>
       <div className="gameArea">
         <h1>Welcome to Wayfarer</h1>
         <p>A digital role playing adventure game based on multiple choice options and D&D style dice rolls and combat actions.</p>
@@ -35,8 +33,6 @@ function GameStart({ handleClick, characterAvatar, characterName }) {
           <button className="normalButton" onClick={handleClick}>Click me to begin!</button>
         </div>
       </div>
-      <ItemsSidebar />
-    </div>
   )
 };
 

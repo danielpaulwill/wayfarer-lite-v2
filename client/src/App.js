@@ -35,12 +35,15 @@ function App() {
   const [errors, setErrors] = useState('');
   const [user, setUser] = useState(null);
   
+  // console.log({ user })
+  // console.log({ characterAvatar })
+  
   let navigate = useNavigate()
-
+  
   // AUTO LOGIN
   useEffect(() => {
-  fetch("/me").then((res) => {
-    if (res.ok) {
+    fetch("/me").then((res) => {
+      if (res.ok) {
       res.json().then((user) => setUser(user));
       navigate('/play')
       alert("Welcome back to Wayfarer! Please select a location to pick up where you left off");
@@ -63,9 +66,6 @@ function handleNameChange(e) {
 function handleAvatarClick(e) {
   setCharacterAvatar(e.target.src)
 }
-
-
-
 
 function handleMapView() {
   navigate('/play')
@@ -107,28 +107,6 @@ function handleMapView() {
 {/* 
   function handleNameChange(e) {
     setCharacterName(e.target.value.toUpperCase())
-  }
-
-  function handleAvatarChange(e) {
-    if (e.target.src === archerAvatar) {
-      setCharacterAvatar(archerAvatar)
-      setHealth(100)
-      setStrength(35)
-      setDefense(30)
-      setLuck(25)
-    } else if (e.target.src === mageAvatar) {
-      setCharacterAvatar(mageAvatar)
-      setHealth(100)
-      setStrength(20)
-      setDefense(25)
-      setLuck(40)
-    } else if (e.target.src === warriorAvatar) {
-      setCharacterAvatar(warriorAvatar)
-      setHealth(100)
-      setStrength(100)
-      setDefense(100)
-      setLuck(10)
-    }
   }
 
   function handleDecrementHealth() {
@@ -223,7 +201,7 @@ function handleMapView() {
         <Route path='welcome' element={<LandingPage handleClick={handleWelcomeClick}/>} />
         <Route path="signup" element={<Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />} />
         <Route path="login" element={<Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} setUser={setUser} />} />
-        <Route path="setup" element={<SetupContainer handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleMapView={handleMapView} />} />
+        <Route path="setup" element={<SetupContainer handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleMapView={handleMapView} characterName={characterName} characterAvatar={characterAvatar} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />} />
         <Route path='play' element={<GameContainer characterName={characterName} characterAvatar={characterAvatar} />} />
       </Routes>
     </div>
