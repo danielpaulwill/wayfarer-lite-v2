@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import CharacterSidebar from "./CharacterSidebar";
 import ItemsSidebar from "./ItemsSidebar";
-import GameStart from "./GameStart";
-import ChooseYourCharacter from "./ChooseYourCharacter";
-import ConfirmGameBegin from "./ConfirmGameBegin";
 import ChooseYourLocation from "./ChooseYourLocation";
 import Location from "./Location";
 
@@ -39,10 +36,8 @@ function GameContainer({ user, characterName, characterAvatar, archerAvatar, mag
   }
   
   return (
-    <div id="gameContainer">
-      <CharacterSidebar avatar={characterAvatar} name={characterName}/>
+    <div className="gameArea">
       {currentPage}
-      <ItemsSidebar />
     </div>
   )
 };

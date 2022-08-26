@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import CharacterSidebar from "./CharacterSidebar";
-import ItemsSidebar from "./ItemsSidebar";
 
 function ChooseYourCharacter({ onClick, onChange, onCharacterConfirm, professionClick, professionSelect, characterName, characterAvatar, archerAvatar, mageAvatar, warriorAvatar, blankAvatar }) {
 
@@ -12,6 +10,36 @@ function ChooseYourCharacter({ onClick, onChange, onCharacterConfirm, profession
   const [chooseCharacterName, setChooseCharacterName] = useState('...')
   const [chooseCharacterAvatar, setChooseCharacterAvatar] = useState(blankAvatar)
   const [chooseProfession, setChooseProfession] = useState('')
+  const [health, setHealth] = useState(0)
+  const [evil, setEvil] = useState(0)
+  const [strength, setStrength] = useState(0)
+  const [defense, setDefense] = useState(0)
+  const [luck, setLuck] = useState(0)
+
+  useEffect(() => {
+    if (chooseProfession === '') {
+      console.log('nope')
+    } else if (chooseProfession === 'Firefighter') {
+      setHealth(100)
+      setEvil(20)
+      setStrength(60)
+      setDefense(30)
+      setLuck(20)
+    } else if (chooseProfession === 'Lawyer') {
+      setHealth(100)
+      setEvil(80)
+      setStrength(40)
+      setDefense(70)
+      setLuck(20)
+    } else if (chooseProfession === 'Engineer') {
+      setHealth(100)
+      setEvil(50)
+      setStrength(50)
+      setDefense(50)
+      setLuck(50)
+    }
+  }, [chooseProfession])
+
 
   function handleOnClick(e) {
     setChooseCharacterAvatar(e.target.src)
@@ -26,6 +54,10 @@ function ChooseYourCharacter({ onClick, onChange, onCharacterConfirm, profession
   function handleCharacterConfirm(e) {
     // e.preventDefault()
     onCharacterConfirm(chooseCharacterName, chooseCharacterAvatar)
+  }
+
+  function handleProfessionChange(e) {
+    setChooseProfession(e.target.value)
   }
 
   return (
@@ -53,17 +85,17 @@ function ChooseYourCharacter({ onClick, onChange, onCharacterConfirm, profession
           </div>
           <br></br>
           <h3>CHOOSE YOUR PROFESSION</h3>
-          <div className="container">
-            <label className="checkmark">ONE
-            <input type="radio" name="profession"></input>
+          <form className="container" onChange={handleProfessionChange}>
+            <label className="checkmark">Firefighter
+            <input type="radio" name="profession" value="Firefighter"></input>
             </label>
-            <label className="checkmark">TWO
-            <input type="radio" name="profession"></input>
+            <label className="checkmark">Lawyer
+            <input type="radio" name="profession" value="Lawyer"></input>
             </label>
-            <label className="checkmark">THREE
-            <input type="radio" name="profession"></input>
+            <label className="checkmark">Engineer
+            <input type="radio" name="profession" value="Engineer"></input>
             </label>
-          </div>
+          </form>
           <div className="center">
             <button className="normalButton" onClick={handleCharacterConfirm}>Confirm your Character</button>
           </div>

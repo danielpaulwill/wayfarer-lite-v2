@@ -4,9 +4,8 @@ import './App.css';
 import LandingPage from "./LandingPage";
 import Login from "./Login";
 import Signup from "./Signup";
-import GameContainer from "./GameContainer"
 import Navbar from "./Navbar";
-import SetupContainer from "./SetupContainer";
+import MainContainer from "./MainContainer";
 // import ChooseYourAdventurer from "./ChooseYourAdventurer";
 // import Adventure from "./Adventure";
 
@@ -45,7 +44,7 @@ function App() {
     fetch("/me").then((res) => {
       if (res.ok) {
       res.json().then((user) => setUser(user));
-      navigate('/play')
+      navigate('/game/play')
       alert("Welcome back to Wayfarer! Please select a location to pick up where you left off");
     } else {
       res.json().then((err) => setErrors(err.errors))
@@ -60,7 +59,7 @@ function App() {
 
 
 function handleNameChange(e) {
-  setCharacterName(e.target.value)
+  setCharacterName(e.target.value.toUpperCae())
 }
 
 function handleAvatarClick(e) {
@@ -105,10 +104,6 @@ function handleMapView() {
   const currentItems = [axe, potion, treasure, helmet] */}
   
 {/* 
-  function handleNameChange(e) {
-    setCharacterName(e.target.value.toUpperCase())
-  }
-
   function handleDecrementHealth() {
     if (health > 4)
     setHealth(health => health - 5)
@@ -137,7 +132,7 @@ function handleMapView() {
     }).then((res) => {
       if (res.ok) {
         res.json().then((user) => setUser(user));
-        navigate('/play')
+        navigate('/game/play')
       }
     });
   }
@@ -173,7 +168,7 @@ function handleMapView() {
       .then((res) => {
         if (res.ok) {
           res.json().then((data) => setUser(data));
-          navigate('/setup')
+          navigate('/game/setup')
         } else {
           res.json().then((err) => setErrors(err.errors))
         }})
@@ -201,8 +196,7 @@ function handleMapView() {
         <Route path='welcome' element={<LandingPage handleClick={handleWelcomeClick}/>} />
         <Route path="signup" element={<Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />} />
         <Route path="login" element={<Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} setUser={setUser} />} />
-        <Route path="setup" element={<SetupContainer user={user} handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleMapView={handleMapView} characterName={characterName} characterAvatar={characterAvatar} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />} />
-        <Route path='play' element={<GameContainer characterName={characterName} characterAvatar={characterAvatar} />} />
+        <Route path="game/*" element={<MainContainer />} />
       </Routes>
     </div>
   );

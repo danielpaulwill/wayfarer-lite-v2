@@ -4,8 +4,6 @@ import ItemsSidebar from "./ItemsSidebar";
 import GameStart from "./GameStart";
 import ChooseYourCharacter from "./ChooseYourCharacter";
 import ConfirmGameBegin from "./ConfirmGameBegin";
-import ChooseYourLocation from "./ChooseYourLocation";
-import Location from "./Location";
 
 function SetupContainer({ user, characterName, characterAvatar, handleNameChange, handleAvatarClick, handleMapView, setErrors, archerAvatar, mageAvatar, warriorAvatar }) {
   
@@ -15,7 +13,6 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
 
   const [currentPage, setCurrentPage] = useState(gameStart)
 
-  console.log("SetupContainer User: ", user)
   function handleStartClick(e) {
     setCurrentPage(chooseYourCharacter)
   }
@@ -46,10 +43,8 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
   }
 
   return (
-    <div id="gameContainer">
-      <CharacterSidebar avatar={characterAvatar} name={characterName}/>
+    <div className="gameArea">
       {currentPage}
-      <ItemsSidebar />
     </div>
   )
 };

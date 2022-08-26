@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import CharacterSidebar from "./CharacterSidebar";
-import ItemsSidebar from "./ItemsSidebar";
 
 function GameStart({ handleClick, characterAvatar, characterName }) {
 
