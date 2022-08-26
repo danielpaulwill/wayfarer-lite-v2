@@ -16,7 +16,7 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
   function handleStartClick(e) {
     setCurrentPage(chooseYourCharacter)
   }
-
+  
   function handleCharacterConfirm(characterName, characterAvatar) {
     // console.log({ chooseCharacterName, chooseCharacterAvatar })
     // POST to the server the character name, avatar, user_id (stats, etc.)

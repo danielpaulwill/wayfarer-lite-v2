@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function GameStart({ handleClick, characterAvatar, characterName }) {
 
   return (
-      <div className="gameArea">
+      <div>
         <h1>Welcome to Wayfarer</h1>
         <p>A digital role playing adventure game based on multiple choice options and D&D style dice rolls and combat actions.</p>
         <h3>A few things before we begin.</h3>

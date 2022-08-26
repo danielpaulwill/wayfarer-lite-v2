@@ -153,7 +153,8 @@
   margin: 0 0 0 auto;
   width: 56%;
   padding: 10px 1.85vw;
-  text-align: center;
+  /* text-align: center; */
+  align-content: center;
   display: flex;
   flex-direction: column;
 }

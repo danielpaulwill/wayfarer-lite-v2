@@ -44,7 +44,7 @@ function App() {
     fetch("/me").then((res) => {
       if (res.ok) {
       res.json().then((user) => setUser(user));
-      navigate('/game/play')
+      // navigate('/game/play')
       alert("Welcome back to Wayfarer! Please select a location to pick up where you left off");
     } else {
       res.json().then((err) => setErrors(err.errors))
@@ -59,7 +59,7 @@ function App() {
 
 
 function handleNameChange(e) {
-  setCharacterName(e.target.value.toUpperCae())
+  setCharacterName(e.target.value.toUpperCase())
 }
 
 function handleAvatarClick(e) {
@@ -67,7 +67,7 @@ function handleAvatarClick(e) {
 }
 
 function handleMapView() {
-  navigate('/play')
+  navigate('game/play')
 }
 
 
@@ -196,7 +196,7 @@ function handleMapView() {
         <Route path='welcome' element={<LandingPage handleClick={handleWelcomeClick}/>} />
         <Route path="signup" element={<Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />} />
         <Route path="login" element={<Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} setUser={setUser} />} />
-        <Route path="game/*" element={<MainContainer />} />
+        <Route path="game/*" element={<MainContainer handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} user={user} characterName={characterName} characterAvatar={characterAvatar} handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleMapView={handleMapView} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />} />
       </Routes>
     </div>
   );

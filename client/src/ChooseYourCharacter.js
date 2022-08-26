@@ -61,7 +61,7 @@ function ChooseYourCharacter({ onClick, onChange, onCharacterConfirm, profession
   }
 
   return (
-      <div className="gameArea">
+      <div>
         <h2>Choose Your Character</h2>
         <h3>ENTER NAME BELOW</h3>
           <input
