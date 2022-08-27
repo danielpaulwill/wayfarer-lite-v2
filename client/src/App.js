@@ -44,7 +44,7 @@ function App() {
     fetch("/me").then((res) => {
       if (res.ok) {
       res.json().then((user) => setUser(user));
-      navigate('/game/play')
+      // navigate('/game/play')
       alert("Welcome back to Wayfarer! Please select a location to pick up where you left off");
     } else {
       res.json().then((err) => setErrors(err.errors))

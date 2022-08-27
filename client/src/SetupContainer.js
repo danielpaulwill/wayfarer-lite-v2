@@ -5,10 +5,10 @@ import GameStart from "./GameStart";
 import ChooseYourCharacter from "./ChooseYourCharacter";
 import ConfirmGameBegin from "./ConfirmGameBegin";
 
-function SetupContainer({ user, characterName, characterAvatar, handleNameChange, handleAvatarClick, handleMapView, setErrors, archerAvatar, mageAvatar, warriorAvatar }) {
+function SetupContainer({ user, characterName, characterAvatar, handleNameChange, handleAvatarClick, handleMapView, setErrors, archerAvatar, mageAvatar, warriorAvatar, professionChange }) {
   
   const gameStart = <GameStart handleClick={handleStartClick} characterName={characterName} characterAvatar={characterAvatar} />
-  const chooseYourCharacter = <ChooseYourCharacter onChange={handleNameChange} onClick={handleAvatarClick} onCharacterConfirm={handleCharacterConfirm} characterName={characterName} characterAvatar={characterAvatar} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />
+  const chooseYourCharacter = <ChooseYourCharacter onChange={handleNameChange} onClick={handleAvatarClick} onCharacterConfirm={handleCharacterConfirm} characterName={characterName} characterAvatar={characterAvatar} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} professionChange={professionChange} />
   const confirmGameBegin = <ConfirmGameBegin onGameBegin={handleMapView} />
 
   const [currentPage, setCurrentPage] = useState(gameStart)

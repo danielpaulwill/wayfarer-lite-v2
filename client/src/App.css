@@ -153,7 +153,7 @@
   margin: 0 0 0 auto;
   width: 56%;
   padding: 10px 1.85vw;
-  /* text-align: center; */
+  text-align: center;
   align-content: center;
   display: flex;
   flex-direction: column;
@@ -403,29 +403,29 @@
   background-color: #FFF;
 } */
 
-/* #healthBar {
+#healthBar {
   background-color: red;
   height: 5px;
   margin-bottom: 30px;
-} */
+}
 
-/* #strengthBar {
+#strengthBar {
   background-color: orange;
   height: 5px;
   margin-bottom: 30px;
-} */
+}
 
-/* #defenseBar {
+#defenseBar {
   background-color: green;
   height: 5px;
   margin-bottom: 30px;
-} */
+}
 
-/* #luckBar {
+#luckBar {
   background-color: yellow;
   height: 5px;
   margin-bottom: 30px;
-} */
+}
 
 /* .itemList {
   display: flex;
