@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function ChooseYourCharacter({ onClick, onChange, onCharacterConfirm, professionClick, professionSelect, characterName, characterAvatar, archerAvatar, mageAvatar, warriorAvatar, blankAvatar, professionChange }) {
+function ChooseYourCharacter({ onClick, onChange, onCharacterConfirm, professionClick, professionSelect, characterName, characterAvatar, archerAvatar, mageAvatar, warriorAvatar, blankAvatar, characterError }) {
 
   // const archerAvatar = "https://lh3.googleusercontent.com/JwMsZ3R2iHSBjWYQWoIgLBXe1M1rxpCxSb5nB3EuGN83peNvNWib68ydPogl-pILdIwAmk2vlXKljdbc90mWWZzj1xWvbv6UeeAv_VtR1WK_KOaKbExB_AKA2sWX2drp6FhkSYzheINFUrZHj3bczzLuqKTHImYnvCHxqp7Rq-p56o4roZT0xocrH2UtlHR-rSe9OIfl0zTNBl_nezwLvga-VxZs7IWLLq2f817YLo5eLLEmK6oypMsr8LIox8ISCO1O0g1C3WaXCxTvVLXOZjrNq7JdACOafqvTdB9H0oYDuTRxZ7fos85sPBHo8om_fHp__FPYVs2MV3aPUpRrNs7PNSIUAnmlV23uOlRcOzwJCJOoa1al54BPT8NQ2zjgSpYKCXp-jwh9YOsHpu8LgBH-S-LLhckjZqCwpG7TPQ-0HPM0Wfm0MluuITOu2TIUop-VctZhEtzxl0A_w3DOsLrolNoOyeFyKFwYEnVa-oeybiRIXp9Fgrkj3ftlj6NqZxzpgc0WcFTy-_xSU-Uu9Xq_7uqlb0g9M3gTD8DrKeoNsvXNJ_cQkqEzZEBFxWjwIyQAx8xQ555pUszC_7o0PSM9kQ_kmubYHEhQsEF9LgxwtxvDTIk_hGIUfinJkvr_RrujwteauGSJU33O3uQUX4UWDthZiyNK3ioCsutCy73qObbXxf6zspp3y41sL7AMulA3Nc8_5xHftSOTsCzdNJR4WxO0PTPazIEkXtQn_BdGuR2JTI-u4GKi1vHDWZ9RuQfUhksnoKV8xMTBjQOCIs1IpO1aF_ynUjeBenc5wKVb9TafECxU4SYtO2jzrfF8C2zL-A=s180-no?authuser=0"
   // const mageAvatar = "https://lh3.googleusercontent.com/upyKddKTFef-o9FxU1MVitOJUaqM6-e_0xSANYm8bE-P5AyN6VuQkQdLy1Zr7NV7s9VXh7lgCsZ2AYQVrBOkx3MUJX8IkzzK_sXWEBDZyyXJ2zYMzt_L0V6A0JVh7okkcsXJNvijt5kzLuz0ofEFlWvV5T7IXKDDhdzcbaI28Zq0PmCSVEbqJjf36onc9b5nRTZbKBDnjjffNMNRF_oV-cuzqBGDHVTcjMTCkxT1LwIstR8jS3T9t-vxMSbOmLExeqDnrI1XkBEl1V-vrWRG29GF-3iiTuQTGx8pvn2i1nbOqB_fcmuvzg6o3lsTiwik2JuDaiOEfLrThX74hAYGw5NBG_mUt4Hy7camFQXv4qLifvVVvPEbNrkZ0NUbdh4jjULPqfWIB-pXW0KRzb4fAb2wKYloZzxD9-kG20gtA8IA_L-1eEJmfQcAYm-PtUQf3AlPOyHzSdG-TJ1HsaXsrH-_-KjAKLuUWZHrCfyS8jWrhFl89MWAxcFfYam1G-_MbOl-9d4ncM5ZnX4zkXXhWUZ8RcgF8X7FJk0-ouASDKM78mUAO1tO37nr0eXd2scvChpJG_HlG8ZL0-83aoPZD1cfHm_dh1JMXe-eqaFHo2hCGzrM9uWr0X7jxI_3HlcJBwkwI_Ko1K2NIlzcE8L7gUl1GA6Kyzw3QL3a7uVNPosA1xroScGQSx2bj5ajH18LRIAFNwlHwfM6ngl1O3xOOmlKWMpfGsRsrQQ-bb8n6lOycnLvlOaez0jZCphL8tU5xNR0vmkzoc_YGoeGrmNjLUaAO5c1gXdHisShiAygecDEHVxmAZN48f5ky_5JuLpHAT9f-w=s180-no?authuser=0"
@@ -16,7 +16,7 @@ function ChooseYourCharacter({ onClick, onChange, onCharacterConfirm, profession
   }
 
   function handleOnChange(e) {
-    setChooseCharacterName(e.target.value)
+    setChooseCharacterName(e.target.value.toUpperCase())
     onChange(e)
   }
 
@@ -25,9 +25,7 @@ function ChooseYourCharacter({ onClick, onChange, onCharacterConfirm, profession
     onCharacterConfirm(chooseCharacterName, chooseCharacterAvatar)
   }
 
-  function handleProfessionChange(e) {
-    professionChange(e.target.value)
-  }
+  console.log({ characterError })
 
   return (
       <div>
@@ -41,6 +39,7 @@ function ChooseYourCharacter({ onClick, onChange, onCharacterConfirm, profession
           </input>
             <br></br>
             <h3>CHOOSE YOUR AVATAR</h3>
+          <p className={(characterError === '') ? 'errors2' : 'errors1'}>{characterError}</p>
           <div className="center">
             <div className="chooseYourAvatarContainer">
               <img className="chooseYourAvatarImg" onClick={handleOnClick} src={warriorAvatar}></img>
@@ -53,18 +52,6 @@ function ChooseYourCharacter({ onClick, onChange, onCharacterConfirm, profession
             </div>
           </div>
           <br></br>
-          <h3>CHOOSE YOUR PROFESSION</h3>
-          <form className="container" onChange={handleProfessionChange}>
-            <label className="checkmark">Firefighter
-            <input type="radio" name="profession" value="Firefighter"></input>
-            </label>
-            <label className="checkmark">Lawyer
-            <input type="radio" name="profession" value="Lawyer"></input>
-            </label>
-            <label className="checkmark">Engineer
-            <input type="radio" name="profession" value="Engineer"></input>
-            </label>
-          </form>
           <div className="center">
             <button className="normalButton" onClick={handleCharacterConfirm}>Confirm your Character</button>
           </div>

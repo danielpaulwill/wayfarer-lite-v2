@@ -133,6 +133,8 @@ function handleMapView() {
       if (res.ok) {
         res.json().then((user) => setUser(user));
         navigate('/game/play')
+      } else {
+        res.json().then((err) => setErrors(err.errors))
       }
     });
   }
@@ -195,7 +197,7 @@ function handleMapView() {
       <Routes>
         <Route path='welcome' element={<LandingPage handleClick={handleWelcomeClick}/>} />
         <Route path="signup" element={<Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />} />
-        <Route path="login" element={<Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} setUser={setUser} />} />
+        <Route path="login" element={<Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} setUser={setUser} errors={errors} />} />
         <Route path="game/*" element={<MainContainer handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} user={user} characterName={characterName} characterAvatar={characterAvatar} handleMapView={handleMapView} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />} />
       </Routes>
     </div>

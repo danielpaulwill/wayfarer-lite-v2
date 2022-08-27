@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   post '/me', to: 'sessions#create'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  post '/character-attributes', to: 'character_attributes#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
