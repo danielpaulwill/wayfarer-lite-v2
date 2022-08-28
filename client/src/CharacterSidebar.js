@@ -1,8 +1,7 @@
 import React from "react";
 
-function CharacterSidebar({ name, avatar, health, strength, defense, luck, attributes }) {
+function CharacterSidebar({ name, avatar, health, strength, defense, luck }) {
 
-  console.log({ attributes })
 
   return (
     <div id="characterSidebar">

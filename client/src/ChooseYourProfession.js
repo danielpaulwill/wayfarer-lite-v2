@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
-function ConfirmGameBegin({ onGameBegin, setCharacterAttributes, setAttributeError, professionChange }) {
+function ChooseYourProfession({ handleMapView, setCharacterAttributes, professionChange, health, evil, strength, defense, luck }) {
  
-  function handleOnClick() {
+  const [attributeError, setAttributeError] = useState('')
+
+  // function handleOnClick() {
 /*
   
   // Use the session user_id to find the character_id to .create the locations
@@ -21,13 +23,35 @@ function ConfirmGameBegin({ onGameBegin, setCharacterAttributes, setAttributeErr
       console.error('Error:', error);
     });
 
+  }
     */
-    onGameBegin()
 
- }
 
  function handleProfessionChange(e) {
   professionChange(e.target.value)
+}
+
+function handleOnClick() {
+  fetch('/character-attributes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      health,
+      evil,
+      strength,
+      defense,
+      luck,
+    })})
+    .then((res) => {
+      if (res.ok) {
+        res.json().then((data) => setCharacterAttributes(data));
+        handleMapView()
+      } else {
+        res.json().then((err) => setAttributeError(err.errors))
+      }})
+
 }
 
   return (
@@ -50,6 +74,7 @@ function ConfirmGameBegin({ onGameBegin, setCharacterAttributes, setAttributeErr
             </label>
           </form>
 
+          <p className={(attributeError === '') ? 'errors2' : 'errors1'}>{attributeError}</p>
 
         <br></br>
         <div className="center">
@@ -59,4 +84,4 @@ function ConfirmGameBegin({ onGameBegin, setCharacterAttributes, setAttributeErr
   )
 };
 
-export default ConfirmGameBegin;
+export default ChooseYourProfession;

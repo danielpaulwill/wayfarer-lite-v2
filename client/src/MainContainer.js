@@ -7,6 +7,9 @@ import GameContainer from "./GameContainer";
 
 function MainContainer({ user, characterName, characterAvatar, handleNameChange, handleAvatarClick, handleMapView, setErrors, archerAvatar, mageAvatar, warriorAvatar }) {
   const [chooseProfession, setChooseProfession] = useState('')
+  const [character, setCharacter] = useState('')
+  const [characterAttributes, setCharacterAttributes] = useState('')
+
   const [health, setHealth] = useState(0)
   const [evil, setEvil] = useState(0)
   const [strength, setStrength] = useState(0)
@@ -45,7 +48,7 @@ function MainContainer({ user, characterName, characterAvatar, handleNameChange,
     <div id="gameContainer">
       <CharacterSidebar avatar={characterAvatar} name={characterName} health={health} evil={evil} strength={strength} defense={defense} luck={luck} />
       <Routes>
-        <Route path="setup" element={<SetupContainer user={user} handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleMapView={handleMapView} characterName={characterName} characterAvatar={characterAvatar} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} professionChange={professionChange} health={health} evil={evil} strength={strength} defense={defense} luck={luck} />} />
+        <Route path="setup" element={<SetupContainer user={user} handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleMapView={handleMapView} characterName={characterName} characterAvatar={characterAvatar} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} professionChange={professionChange} health={health} evil={evil} strength={strength} defense={defense} luck={luck} setCharacterAttributes={setCharacterAttributes} setCharacter={setCharacter} />} />
         <Route path='play' element={<GameContainer characterName={characterName} characterAvatar={characterAvatar} />} />
       </Routes>
       <ItemsSidebar />
