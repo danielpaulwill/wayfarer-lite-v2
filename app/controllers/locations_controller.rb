@@ -13,4 +13,9 @@ class LocationsController < ApplicationController
     render json: locations
   end
 
+  def select
+    location = Location.find_by(name: params[:select])
+    render json: location
+  end
+
 end

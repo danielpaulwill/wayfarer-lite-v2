@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function ChooseYourProfession({ handleMapView, setCharacterAttributes, professionChange }) {
+function ChooseYourProfession({ handleMapView, setCharacterAttributes, professionChange, locationSeed }) {
  
   const [attributeError, setAttributeError] = useState('')
 
@@ -12,73 +12,59 @@ function ChooseYourProfession({ handleMapView, setCharacterAttributes, professio
   const [localLuck, setLocalLuck] = useState('')
 
 
- function handleProfessionChange(e) {
-  professionChange(e.target.value)
-  setLocalProfession(e.target.value)
-}
-
-useEffect(() => {
-  if (localProfession === '') {
-  } else if (localProfession === 'Firefighter') {
-    setLocalHealth(100)
-    setLocalEvil(20)
-    setLocalStrength(60)
-    setLocalDefense(30)
-    setLocalLuck(20)
-  } else if (localProfession === 'Lawyer') {
-    setLocalHealth(100)
-    setLocalEvil(80)
-    setLocalStrength(40)
-    setLocalDefense(70)
-    setLocalLuck(20)
-  } else if (localProfession === 'Engineer') {
-    setLocalHealth(100)
-    setLocalEvil(50)
-    setLocalStrength(50)
-    setLocalDefense(50)
-    setLocalLuck(50)
+  function handleProfessionChange(e) {
+    professionChange(e.target.value)
+    setLocalProfession(e.target.value)
   }
-}, [localProfession])
 
-console.log({ localHealth, localEvil, localStrength, localDefense, localLuck })
+  useEffect(() => {
+    if (localProfession === '') {
+    } else if (localProfession === 'Firefighter') {
+      setLocalHealth(100)
+      setLocalEvil(20)
+      setLocalStrength(60)
+      setLocalDefense(30)
+      setLocalLuck(20)
+    } else if (localProfession === 'Lawyer') {
+      setLocalHealth(100)
+      setLocalEvil(80)
+      setLocalStrength(40)
+      setLocalDefense(70)
+      setLocalLuck(20)
+    } else if (localProfession === 'Engineer') {
+      setLocalHealth(100)
+      setLocalEvil(50)
+      setLocalStrength(50)
+      setLocalDefense(50)
+      setLocalLuck(50)
+    }
+  }, [localProfession])
+
+  console.log({ localHealth, localEvil, localStrength, localDefense, localLuck })
 
 
-function handleOnClick() {
-  // character_attributes POST
-  fetch('/character-attributes', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      health: localHealth,
-      evil: localEvil,
-      strength: localStrength,
-      defense: localDefense,
-      luck: localLuck,
-    })})
-    .then((res) => {
-      if (res.ok) {
-        res.json().then((data) => setCharacterAttributes(data));
-        handleMapView()
-      } else {
-        res.json().then((err) => setAttributeError(err.errors))
-      }})
-
-  // location POST
-  // fetch('/locations', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify([]),
-  // })
-  //   .then((res) => {
-  //     if (res.ok) {
-  //       res.json().then((data) => console.log(data));
-  //     } else {
-  //       res.json().then((err) => console.log(err.errors))
-  //     }})
+  function handleOnClick() {
+    // character_attributes POST
+    fetch('/character-attributes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        health: localHealth,
+        evil: localEvil,
+        strength: localStrength,
+        defense: localDefense,
+        luck: localLuck,
+      })})
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((data) => setCharacterAttributes(data));
+          handleMapView()
+        } else {
+          res.json().then((err) => setAttributeError(err.errors))
+        }})
+        locationSeed()
   }
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CharacterSidebar from "./CharacterSidebar";
 import ItemsSidebar from "./ItemsSidebar";
 import ChooseYourLocation from "./ChooseYourLocation";
@@ -12,23 +12,27 @@ function GameContainer({ user, characterName, characterAvatar, archerAvatar, mag
     is_complete: false
   }
 
-  const [currentLocation, setCurrentLocation] = useState(forest)
+  const [currentLocation, setCurrentLocation] = useState('')
 
   // const forest = <Forest islandMap={handleMapView} />
   // const volcano = <Volcano islandMap={handleMapView} />
   const location = <Location currentLocation={currentLocation} onEventSelect={handleEventSelect} />
   const chooseYourLocation = <ChooseYourLocation onLocationSelect={handleLocationSelect} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />
 
-  
+  const [selectedLocation, setSelectedLocation] = useState('')
 
 
   const [currentPage, setCurrentPage] = useState(chooseYourLocation)
 
+  useEffect(() => {
+    fetch(`/locations/${selectedLocation}`)
+      .then(res => res.json())
+      .then((data) => console.log(data));
+  }, [selectedLocation])
 
   function handleLocationSelect(e) {
-    console.log(e.target.value)
+    setSelectedLocation(e.target.value)
     // setCurrentPage(location)
-    // (e.target.value) === "forest" ? setCurrentPage(forest) : setCurrentPage(volcano)
   }
 
   function handleEventSelect(event) {
