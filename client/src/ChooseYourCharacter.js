@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 function ChooseYourCharacter({ onClick, onChange, setCurrentPage, chooseYourProfession, archerAvatar, mageAvatar, warriorAvatar, blankAvatar, setCharacter, onCharacterConfirm }) {
 
-  const [chooseCharacterName, setChooseCharacterName] = useState('...')
+  const [chooseCharacterName, setChooseCharacterName] = useState('')
   const [chooseCharacterAvatar, setChooseCharacterAvatar] = useState(blankAvatar)  
 
   const [characterError, setCharacterError] = useState('')
@@ -38,8 +38,6 @@ function ChooseYourCharacter({ onClick, onChange, setCurrentPage, chooseYourProf
           res.json().then((err) => setCharacterError(err.errors))
         }})
   }
-
-  console.log({ characterError })
 
   return (
       <div>

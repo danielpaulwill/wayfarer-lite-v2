@@ -15,7 +15,7 @@ function App() {
   const archerAvatar = require("./assets/characters/archer.png")
   const mageAvatar = require("./assets/characters/mage.png")
   const warriorAvatar = require("./assets/characters/warrior.png")
-  const [characterName, setCharacterName] = useState("...")
+  const [characterName, setCharacterName] = useState("")
   const [characterAvatar, setCharacterAvatar] = useState(blankAvatar)
   // const [health, setHealth] = useState(0)
   // const [strength, setStrength] = useState(0)
@@ -68,6 +68,7 @@ function handleAvatarClick(e) {
 
 function handleMapView() {
   navigate('game/play')
+  window.scrollTo(0, 0);
 }
 
 
@@ -133,6 +134,7 @@ function handleMapView() {
       if (res.ok) {
         res.json().then((user) => setUser(user));
         navigate('/game/play')
+        window.scrollTo(0, 0);
       } else {
         res.json().then((err) => setErrors(err.errors))
       }
@@ -171,6 +173,7 @@ function handleMapView() {
         if (res.ok) {
           res.json().then((data) => setUser(data));
           navigate('/game/setup')
+          window.scrollTo(0, 0);
         } else {
           res.json().then((err) => setErrors(err.errors))
         }})

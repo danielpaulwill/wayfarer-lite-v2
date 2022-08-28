@@ -5,7 +5,7 @@ function CharacterSidebar({ name, avatar, health, strength, defense, luck }) {
 
   return (
     <div id="characterSidebar">
-      <h2 style={name === "..." ? {color: "black"} : {color: "white"}}>{name}</h2>
+      <h2 style={name === "" ? {color: "black"} : {color: "white"}}>{name}</h2>
       <img src={avatar} referrerPolicy="no-referrer"></img>
       <div id="sidebarStats">
         <h3>Stats</h3>

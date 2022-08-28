@@ -10,15 +10,15 @@ function MainContainer({ user, characterName, characterAvatar, handleNameChange,
   const [character, setCharacter] = useState('')
   const [characterAttributes, setCharacterAttributes] = useState('')
 
-  const [health, setHealth] = useState(0)
-  const [evil, setEvil] = useState(0)
-  const [strength, setStrength] = useState(0)
-  const [defense, setDefense] = useState(0)
-  const [luck, setLuck] = useState(0)
+  const [health, setHealth] = useState('')
+  const [evil, setEvil] = useState('')
+  const [strength, setStrength] = useState('')
+  const [defense, setDefense] = useState('')
+  const [luck, setLuck] = useState('')
+
 
   useEffect(() => {
     if (chooseProfession === '') {
-      console.log('nope')
     } else if (chooseProfession === 'Firefighter') {
       setHealth(100)
       setEvil(20)

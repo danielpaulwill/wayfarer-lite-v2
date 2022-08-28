@@ -1,48 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function ChooseYourProfession({ handleMapView, setCharacterAttributes, professionChange, health, evil, strength, defense, luck }) {
+function ChooseYourProfession({ handleMapView, setCharacterAttributes, professionChange }) {
  
   const [attributeError, setAttributeError] = useState('')
 
-  // function handleOnClick() {
-/*
-  
-  // Use the session user_id to find the character_id to .create the locations
-  fetch('xxx', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => if res.ok? (not sure if this is right syntax res.json())
-    .then((data) => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-
-  }
-    */
+  const [localProfession, setLocalProfession] = useState('')
+  const [localHealth, setLocalHealth] = useState('')
+  const [localEvil, setLocalEvil] = useState('')
+  const [localStrength, setLocalStrength] = useState('')
+  const [localDefense, setLocalDefense] = useState('')
+  const [localLuck, setLocalLuck] = useState('')
 
 
  function handleProfessionChange(e) {
   professionChange(e.target.value)
+  setLocalProfession(e.target.value)
 }
 
+useEffect(() => {
+  if (localProfession === '') {
+  } else if (localProfession === 'Firefighter') {
+    setLocalHealth(100)
+    setLocalEvil(20)
+    setLocalStrength(60)
+    setLocalDefense(30)
+    setLocalLuck(20)
+  } else if (localProfession === 'Lawyer') {
+    setLocalHealth(100)
+    setLocalEvil(80)
+    setLocalStrength(40)
+    setLocalDefense(70)
+    setLocalLuck(20)
+  } else if (localProfession === 'Engineer') {
+    setLocalHealth(100)
+    setLocalEvil(50)
+    setLocalStrength(50)
+    setLocalDefense(50)
+    setLocalLuck(50)
+  }
+}, [localProfession])
+
+console.log({ localHealth, localEvil, localStrength, localDefense, localLuck })
+
+
 function handleOnClick() {
+  // character_attributes POST
   fetch('/character-attributes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      health,
-      evil,
-      strength,
-      defense,
-      luck,
+      health: localHealth,
+      evil: localEvil,
+      strength: localStrength,
+      defense: localDefense,
+      luck: localLuck,
     })})
     .then((res) => {
       if (res.ok) {
@@ -52,7 +65,23 @@ function handleOnClick() {
         res.json().then((err) => setAttributeError(err.errors))
       }})
 
-}
+  // location POST
+  // fetch('/locations', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify([]),
+  // })
+  //   .then((res) => {
+  //     if (res.ok) {
+  //       res.json().then((data) => console.log(data));
+  //     } else {
+  //       res.json().then((err) => console.log(err.errors))
+  //     }})
+  }
+
+
 
   return (
     <div>
@@ -73,9 +102,8 @@ function handleOnClick() {
             <input type="radio" name="profession" value="Engineer"></input>
             </label>
           </form>
-
-          <p className={(attributeError === '') ? 'errors2' : 'errors1'}>{attributeError}</p>
-
+        <br></br>
+        <p className={(attributeError === '') ? 'errors2' : 'errors1'}>{attributeError}</p>
         <br></br>
         <div className="center">
             <button className="normalButton" onClick={handleOnClick}>Begin Exploring</button>
