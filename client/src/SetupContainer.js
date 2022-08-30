@@ -33,6 +33,7 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
     })
       .then((res) => {
         if (res.ok) {
+          console.log("Locations POSTed")
           // events POST
           fetch('/events', {
             method: 'POST',
@@ -43,6 +44,7 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
           })
             .then((res) => {
               if (res.ok) {
+                console.log("Events POSTed")
                 // options Post
                 fetch('/options', {
                   method: 'POST',
@@ -53,7 +55,7 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
                 })
                   .then((res) => {
                     if (res.ok) {
-                     
+                      console.log("Options POSTed")
                     }})
               }})
         }})

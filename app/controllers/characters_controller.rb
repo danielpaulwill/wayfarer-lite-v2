@@ -3,6 +3,7 @@ class CharactersController < ApplicationController
   def create
     character = Character.create(name: params[:name], avatar: params[:avatar], user_id: session[:user_id])
     if character.valid?
+      session[:character_id] = character.id
       render json: character, status: :created
     else
       render json: { errors: character.errors.full_messages }, status: :unprocessable_entity

@@ -1,12 +1,12 @@
 import React from "react";
 
-function CharacterSidebar({ name, avatar, health, strength, defense, luck }) {
+function CharacterSidebar({ character, name, avatar, health, strength, defense, luck }) {
 
 
   return (
     <div id="characterSidebar">
-      <h2 style={name === "" ? {color: "black"} : {color: "white"}}>{name}</h2>
-      <img src={avatar} referrerPolicy="no-referrer"></img>
+      <h2 style={character.name === "" ? {color: "black"} : {color: "white"}}>{character.name}</h2>
+      <img src={character.avatar} referrerPolicy="no-referrer"></img>
       <div id="sidebarStats">
         <h3>Stats</h3>
         <p>Health: {health}</p>

@@ -33,8 +33,10 @@ function App() {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [errors, setErrors] = useState('');
   const [user, setUser] = useState(null);
+  const [character, setCharacter] = useState('');
   
-  // console.log({ user })
+  console.log({ user })
+  console.log({ character })
   // console.log({ characterAvatar })
   
   let navigate = useNavigate()
@@ -49,11 +51,17 @@ function App() {
     } else {
       res.json().then((err) => setErrors(err.errors))
       navigate('/welcome')
-    }
-  });
-}, []);
+      }
+    });
+  }, []);
 
 
+  useEffect(() => {
+    setCharacter({
+      name: characterName,
+      avatar: characterAvatar
+    })
+  },[characterName, characterAvatar])
 
 
 
@@ -201,7 +209,7 @@ function handleMapView() {
         <Route path='welcome' element={<LandingPage handleClick={handleWelcomeClick}/>} />
         <Route path="signup" element={<Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} onPasswordConfirm={handlePasswordConfirmationChange} errors={errors} />} />
         <Route path="login" element={<Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} setUser={setUser} errors={errors} />} />
-        <Route path="game/*" element={<MainContainer handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} user={user} characterName={characterName} characterAvatar={characterAvatar} handleMapView={handleMapView} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />} />
+        <Route path="game/*" element={<MainContainer handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} user={user} character={character} characterName={characterName} characterAvatar={characterAvatar} handleMapView={handleMapView} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} setCharacter={setCharacter} />} />
       </Routes>
     </div>
   );
