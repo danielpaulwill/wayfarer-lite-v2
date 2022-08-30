@@ -22,6 +22,14 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
     window.scrollTo(0, 0);
   }
 
+
+//   function doTheseFirst()
+// {
+//   setTimeout(function(){ andThenDoThese(); }, 5000);
+//   // Maybe show some pictures and play some sounds for 5 seconds
+// }
+
+
   function locationSeed() {
     // locations POST
     fetch('/locations', {
@@ -34,31 +42,56 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
       .then((res) => {
         if (res.ok) {
           console.log("Locations POSTed")
-          // events POST
-          fetch('/events', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify([]),
-          })
-            .then((res) => {
-              if (res.ok) {
-                console.log("Events POSTed")
-                // options Post
-                fetch('/options', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify([]),
-                })
-                  .then((res) => {
-                    if (res.ok) {
-                      console.log("Options POSTed")
-                    }})
-              }})
+          setTimeout(function(){ 
+            // events POST
+            fetch('/events', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify([]),
+            })
+              .then((res) => {
+                if (res.ok) {
+                  console.log("Events POSTed")
+                  
+                }})
+      
+            }, 2000);
         }})
+
+    // setTimeout(function(){ 
+    //   // events POST
+    //   fetch('/events', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify([]),
+    //   })
+    //     .then((res) => {
+    //       if (res.ok) {
+    //         console.log("Events POSTed")
+            
+    //       }})
+
+    //   }, 2000);
+
+
+    setTimeout(function(){
+      // options Post
+      fetch('/options', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify([]),
+      })
+        .then((res) => {
+          if (res.ok) {
+            console.log("Options POSTed")
+          }})
+    }, 4000);
 
 
 

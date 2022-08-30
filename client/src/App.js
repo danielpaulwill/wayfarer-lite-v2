@@ -34,10 +34,7 @@ function App() {
   const [errors, setErrors] = useState('');
   const [user, setUser] = useState(null);
   const [character, setCharacter] = useState('');
-  
-  console.log({ user })
-  console.log({ character })
-  
+    
   let navigate = useNavigate()
   
   // AUTO LOGIN
@@ -53,8 +50,7 @@ function App() {
     } else {
       res.json().then((err) => setErrors(err.errors))
       navigate('/welcome')
-      }
-    });
+    }});
   }, []);
 
 
