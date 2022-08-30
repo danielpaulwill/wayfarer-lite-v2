@@ -24,10 +24,29 @@ function GameContainer({ user, characterName, characterAvatar, archerAvatar, mag
 
   const [currentPage, setCurrentPage] = useState(chooseYourLocation)
 
+  const [test, setTest] = useState('')
+
+  console.log({ test })
+  console.log({ selectedLocation })
+
   useEffect(() => {
-    fetch(`/locations/${selectedLocation}`)
-      .then(res => res.json())
-      .then((data) => console.log(data));
+    fetch('/locations-select', {
+      method: 'POST',
+      // mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: selectedLocation,
+      })})
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((data) => setTest(data));
+          window.scrollTo(0, 0);
+        } else {
+          console.log("Location failed")
+          // res.json().then((err) => setErrors(err.errors))
+        }})
   }, [selectedLocation])
 
   function handleLocationSelect(e) {

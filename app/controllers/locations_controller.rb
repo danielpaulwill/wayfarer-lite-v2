@@ -22,9 +22,11 @@ class LocationsController < ApplicationController
     render json: locations
   end
 
-  # def select
-  #   location = Location.find_by(name: params[:select])
-  #   render json: location
-  # end
+  def select
+    user = User.find_by(id: session[:user_id])
+    character = user.character
+    location = character.locations.find_by(name: params[:name])
+    render json: location, except: [:created_at, :updated_at], status: :ok
+  end
 
 end

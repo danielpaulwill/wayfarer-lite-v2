@@ -7,11 +7,11 @@ function ChooseYourLocation({ onLocationSelect }) {
     <div id="chooseYourLocation">
       <div className="locationMap">
         <h3>Forest</h3>
-        <button id="forestButton" value="forest" onClick={onLocationSelect}></button>
+        <button id="forestButton" value="Forest" onClick={onLocationSelect}></button>
       </div>
       <div className="locationMap">
         <h3>Volcano</h3>
-        <button id="volcanoButton" value="volcano" onClick={onLocationSelect}></button>
+        <button id="volcanoButton" value="Volcano" onClick={onLocationSelect}></button>
       </div>
 
     </div>
