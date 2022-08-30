@@ -2,7 +2,7 @@ class OptionsController < ApplicationController
 
   def create
     user = User.find_by(id: session[:user_id])
-    # user = User.find(4)
+    # user = User.find(9)
     character = user.character
 
     forest = character.locations.find_by(name: "Forest")
@@ -42,10 +42,9 @@ class OptionsController < ApplicationController
     v4o1 = Option.create(event_id: v4.id, name: "Option 1", description: "The first option of the fourth Volcano event.", is_complete: false)
     v4o2 = Option.create(event_id: v4.id, name: "Option 2", description: "The second option of the fourth Volcano event.", is_complete: false)
 
-    options = Option.all
-
     # byebug
-    if options.valid?
+    if (f1o1 && f1o2 && f2o1 && f1o2 && f3o1 && f3o2 && f4o1 && f4o2 && v1o1 && v1o2 && v2o1 && v1o2 && v3o1 && v3o2 && v4o1 && v4o2).valid?
+    options = Option.all
     render json: options, status: :created
     else
       render json: { errors: f1o1.errors.full_messages }, status: :unprocessable_entity
