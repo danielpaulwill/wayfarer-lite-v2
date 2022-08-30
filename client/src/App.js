@@ -37,7 +37,6 @@ function App() {
   
   console.log({ user })
   console.log({ character })
-  // console.log({ characterAvatar })
   
   let navigate = useNavigate()
   
@@ -45,8 +44,11 @@ function App() {
   useEffect(() => {
     fetch("/me").then((res) => {
       if (res.ok) {
-      res.json().then((user) => setUser(user));
-      // navigate('/game/play')
+      res.json().then((user) => {
+        setUser(user)
+        setCharacter(user.character)
+      });
+      navigate('/game/play')
       alert("Welcome back to Wayfarer! Please select a location to pick up where you left off");
     } else {
       res.json().then((err) => setErrors(err.errors))
@@ -140,7 +142,11 @@ function handleMapView() {
       body: JSON.stringify({ username, password }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then((user) => setUser(user));
+        res.json().then((user) => {
+          setUser(user)
+          setCharacter(user.character)
+        });
+        
         navigate('/game/play')
         window.scrollTo(0, 0);
       } else {

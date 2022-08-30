@@ -40,9 +40,6 @@ function ChooseYourProfession({ handleMapView, setCharacterAttributes, professio
     }
   }, [localProfession])
 
-  console.log({ localHealth, localEvil, localStrength, localDefense, localLuck })
-
-
   function handleOnClick() {
     // character_attributes POST
     fetch('/character-attributes', {

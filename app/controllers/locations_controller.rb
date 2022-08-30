@@ -8,6 +8,14 @@ class LocationsController < ApplicationController
     render json: locations, status: :created
   end
 
+  def show
+    user = User.find_by(id: session[user_id])
+    character = user.character
+    byebug
+    forest = character.location.find_by(name: params[select])
+
+  end
+
   def index
     locations = Location.all
     render json: locations
