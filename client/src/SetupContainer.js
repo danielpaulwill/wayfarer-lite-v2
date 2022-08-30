@@ -42,40 +42,24 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
       .then((res) => {
         if (res.ok) {
           console.log("Locations POSTed")
-          setTimeout(function(){ 
-            // events POST
-            fetch('/events', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify([]),
-            })
-              .then((res) => {
-                if (res.ok) {
-                  console.log("Events POSTed")
-                  
-                }})
-      
-            }, 2000);
         }})
 
-    // setTimeout(function(){ 
-    //   // events POST
-    //   fetch('/events', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify([]),
-    //   })
-    //     .then((res) => {
-    //       if (res.ok) {
-    //         console.log("Events POSTed")
+    setTimeout(function(){ 
+      // events POST
+      fetch('/events', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify([]),
+      })
+        .then((res) => {
+          if (res.ok) {
+            console.log("Events POSTed")
             
-    //       }})
+          }})
 
-    //   }, 2000);
+      }, 2000);
 
 
     setTimeout(function(){

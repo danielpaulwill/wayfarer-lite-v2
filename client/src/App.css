@@ -403,6 +403,12 @@
   background-color: #FFF;
 } */
 
+#blankBar {
+  background-color: black;
+  height: 5px;
+  margin-bottom: 30px;
+}
+
 #healthBar {
   background-color: red;
   height: 5px;

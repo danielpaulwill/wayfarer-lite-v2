@@ -10,13 +10,13 @@ function CharacterSidebar({ character, name, avatar, health, strength, defense, 
       <div id="sidebarStats">
         <h3>Stats</h3>
         <p>Health: {health}</p>
-        <div id="healthBar" style={{width: `${health}%`}}></div>
+        <div id={(health === '') ? "blankBar" : "healthBar"} style={{width: `${health}%`}}></div>
         <p>Strength: {strength}</p>
-        <div id="strengthBar" style={{width: `${strength}%`}}></div>
+        <div id={(strength === '') ? "blankBar" : "strengthBar"} style={{width: `${strength}%`}}></div>
         <p>Defense: {defense}</p>
-        <div id="defenseBar" style={{width: `${defense}%`}}></div>
+        <div id={(defense === '') ? "blankBar" : "defenseBar"} style={{width: `${defense}%`}}></div>
         <p>Luck: {luck}</p>
-        <div id="luckBar" style={{width: `${luck}%`}}></div>
+        <div id={(luck === '') ? "blankBar" : "luckBar"} style={{width: `${luck}%`}}></div>
       </div>
     </div>
   )
