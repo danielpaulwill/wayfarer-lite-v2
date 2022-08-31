@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
-import CharacterSidebar from "./CharacterSidebar";
-import ItemsSidebar from "./ItemsSidebar";
 import ChooseYourLocation from "./ChooseYourLocation";
-import Location from "./Location";
+import EventList from "./EventList";
 
 function GameContainer({ user, characterName, characterAvatar, archerAvatar, mageAvatar, warriorAvatar }) {
   
-  const [currentLocation, setCurrentLocation] = useState('')
+  const [location, setLocation] = useState('')
 
-  const location = <Location currentLocation={currentLocation} onEventSelect={handleEventSelect} />
+  const eventList = <EventList location={location} onEventSelect={handleEventSelect} goToIslandMap={goToIslandMap} />
   const chooseYourLocation = <ChooseYourLocation onLocationSelect={handleLocationSelect} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />
 
   const [selectedLocation, setSelectedLocation] = useState('')
-  const [receivedLocation, setReceivedLocation] = useState('')
 
   const [currentPage, setCurrentPage] = useState(chooseYourLocation)
 
+  function handleLocationSelect(e) {
+    setSelectedLocation(e.target.value)
+    handleLocationFetch()
+  }
 
-  console.log(receivedLocation)
-
-  useEffect(() => {
+  function handleLocationFetch() {
     fetch('/locations-select', {
       method: 'POST',
       // mode: 'no-cors',
@@ -31,21 +30,27 @@ function GameContainer({ user, characterName, characterAvatar, archerAvatar, mag
       })})
       .then((res) => {
         if (res.ok) {
-          res.json().then((data) => setReceivedLocation(data));
+          res.json().then((data) => setLocation(data));
+          setTimeout(function(){
+            handleEventPage()
+          }, 500);
           window.scrollTo(0, 0);
         } else {
           console.log("Location failed")
           // res.json().then((err) => setErrors(err.errors))
         }})
-  }, [selectedLocation])
+  }
 
-  function handleLocationSelect(e) {
-    setSelectedLocation(e.target.value)
-    // setCurrentPage(location)
+  function handleEventPage() {
+    setCurrentPage(eventList)
   }
 
   function handleEventSelect(event) {
-    setCurrentLocation(event)
+    setLocation(event)
+  }
+
+  function goToIslandMap() {
+    setCurrentPage(chooseYourLocation)
   }
   
   return (
