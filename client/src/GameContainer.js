@@ -6,28 +6,18 @@ import Location from "./Location";
 
 function GameContainer({ user, characterName, characterAvatar, archerAvatar, mageAvatar, warriorAvatar }) {
   
-  let forest = {
-    name: "Forest",
-    description: "A dense rainforest",
-    is_complete: false
-  }
-
   const [currentLocation, setCurrentLocation] = useState('')
 
-  // const forest = <Forest islandMap={handleMapView} />
-  // const volcano = <Volcano islandMap={handleMapView} />
   const location = <Location currentLocation={currentLocation} onEventSelect={handleEventSelect} />
   const chooseYourLocation = <ChooseYourLocation onLocationSelect={handleLocationSelect} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />
 
   const [selectedLocation, setSelectedLocation] = useState('')
-
+  const [receivedLocation, setReceivedLocation] = useState('')
 
   const [currentPage, setCurrentPage] = useState(chooseYourLocation)
 
-  const [test, setTest] = useState('')
 
-  console.log({ test })
-  console.log({ selectedLocation })
+  console.log(receivedLocation)
 
   useEffect(() => {
     fetch('/locations-select', {
@@ -41,7 +31,7 @@ function GameContainer({ user, characterName, characterAvatar, archerAvatar, mag
       })})
       .then((res) => {
         if (res.ok) {
-          res.json().then((data) => setTest(data));
+          res.json().then((data) => setReceivedLocation(data));
           window.scrollTo(0, 0);
         } else {
           console.log("Location failed")
