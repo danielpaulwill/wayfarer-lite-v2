@@ -191,7 +191,7 @@ function GameContainer({ user, characterName, characterAvatar, archerAvatar, mag
 
   function handleOptionSelect(option) {
     console.log(option)
-    const optionResult = <OptionResult option={option} />
+    const optionResult = <OptionResult option={option} locationWorkaround={locationWorkaround} />
     setCurrentPage(optionResult)
   }
   
