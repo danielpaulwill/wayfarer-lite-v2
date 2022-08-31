@@ -1,19 +1,14 @@
 import React from "react";
 
-function Event({ event }) {
+function Event({ event, onOptionSelect }) {
 
-  let options = event.options.map((option) => (<button className="normalButton">{option.name}</button>))
-  // name: "Event One",
-  //       description: "The first Event",
-  //       is_complete: false,
-  //       options: [{
-    // name: "Option One",
-    //       description: "The first option of the first event",
-    //       is_complete: false
+  // console.log({ event.options })
+  let options = event.options.map((option) => (<button className="normalButton" onClick={e => onOptionSelect(option)} >{option.name}</button>))
+  
  
   return (
-    <div className="gameArea">
-      <div className="center">
+    <div className="center">
+      <div>
         <h2>{event.name}</h2>
         <p>{event.description}</p>
         {options}
