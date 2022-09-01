@@ -3,27 +3,26 @@ import Event from "./Event";
 
 function EventList({ goToIslandMap, location, onEventSelect }) {
   const [allEvents, setAllEvents] = useState(location.events)
-
-  let eventsOptions;
+  const [eventsOptions, setEventsOptions] = useState()
 
   // Save the events to the allEvents State
   useEffect(() => {
     setAllEvents(location.events)
-    }, [])
+    }, [location])
 
   // Create a button for each event
   useEffect(() => {
-    eventsOptions = allEvents.map((event) => (event.is_complete ? console.log("skip") : 
+    let allOptions = allEvents.map((event) => (event.is_complete ? console.log("") : 
     <div className="center" key={event.id}>
-      <button className="normalButton" value={event.id} onClick={e => onEventSelect(event)}>{event.name}</button>
+      <button className="normalButton" value={event.id} onClick={e => onSelectedEvent(event)}>{event.name}</button>
     </div>
   ))
+    setEventsOptions(allOptions)
   }, [allEvents])
 
-
-// PATCH to no longer show events that have been executed
-  function needToNameThisFunction(event) {
-    fetch('/events', {
+  function onSelectedEvent(event) {
+    // PATCH to no longer show events that have been executed
+    fetch(`/events/${event.id}`, {
       method: 'PATCH',
       // mode: 'no-cors',
       headers: {
@@ -35,7 +34,13 @@ function EventList({ goToIslandMap, location, onEventSelect }) {
       .then((res) => {
         if (res.ok) {
           res.json().then((data) => {
-            let updatedEvents = allEvents.map(event => data.find(eve => eve.id === event.id) || event);
+            let updatedEvents = allEvents.map(event => {
+              if (event.id === data.id) {
+                return {...event, is_complete: true}
+              } else {
+                return event
+              }
+            });
             setAllEvents(updatedEvents)
           });
         } else {
@@ -43,8 +48,7 @@ function EventList({ goToIslandMap, location, onEventSelect }) {
         }})
     onEventSelect(event)
   }
-        
- 
+
   return (
     <div>
       <div className="center">

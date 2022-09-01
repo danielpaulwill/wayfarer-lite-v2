@@ -31,4 +31,14 @@ class EventsController < ApplicationController
     render json: events
   end
 
+  def update
+    event = Event.find_by(id: params[:id])
+    if event
+      event.update(is_complete: params[:is_complete])
+      render json: event, status: :accepted
+    else
+      render json: { error: "Not updated" }, status: :unauthorized
+    end
+  end
+
 end

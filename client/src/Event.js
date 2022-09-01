@@ -3,7 +3,7 @@ import React from "react";
 function Event({ event, onOptionSelect }) {
 
   // console.log({ event.options })
-  let options = event.options.map((option) => (<button className="normalButton" onClick={e => onOptionSelect(option)} >{option.name}</button>))
+  let options = event.options.map((option) => (<button key={option.id} className="normalButton" onClick={e => onOptionSelect(option)} >{option.name}</button>))
   
  
   return (
