@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Event from "./Event";
 
 function EventList({ goToIslandMap, location, onEventSelect }) {
-  const [allEvents, setAllEvents] = useState(location.events)
+  const [allEvents, setAllEvents] = useState()
   const [eventsOptions, setEventsOptions] = useState()
   const [selectedEvent, setSelectedEvent] = useState()
 
@@ -80,7 +80,7 @@ function EventList({ goToIslandMap, location, onEventSelect }) {
               console.log(data)
               let updatedEvents = allEvents.map(event => {
                 if (event.id === data.id) {
-                  return data
+                  return {...event, is_complete: true}
                   // console.log("skip")
                 } else {
                   return event
