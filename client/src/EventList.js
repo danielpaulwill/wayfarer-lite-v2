@@ -2,22 +2,27 @@ import React, { useEffect, useState } from "react";
 import Event from "./Event";
 
 function EventList({ goToIslandMap, location, onEventSelect }) {
-  const [events, setEvents] = useState(location.events)
+  const [allEvents, setAllEvents] = useState(location.events)
+
+  let eventsOptions;
+
+  // Save the events to the allEvents State
+  useEffect(() => {
+    setAllEvents(location.events)
+    }, [])
+
+  // Create a button for each event
+  useEffect(() => {
+    eventsOptions = allEvents.map((event) => (event.is_complete ? console.log("skip") : 
+    <div className="center" key={event.id}>
+      <button className="normalButton" value={event.id} onClick={e => onEventSelect(event)}>{event.name}</button>
+    </div>
+  ))
+  }, [allEvents])
 
 
-    // console.log({ events })
-  // useEffect(() => {
-    // setEvents(location.events)
-  // }, [location])
-
-  let eventsOptions = events.map((event) => (event.is_complete ? console.log("skip") : 
-  <div className="center" key={event.id}>
-    <button className="normalButton" value={event.id} onClick={e => onEventSelect(event)}>{event.name}</button>
-  </div>
-))
-
-  function xxx(event) {
-
+// PATCH to no longer show events that have been executed
+  function needToNameThisFunction(event) {
     fetch('/events', {
       method: 'PATCH',
       // mode: 'no-cors',
@@ -29,8 +34,10 @@ function EventList({ goToIslandMap, location, onEventSelect }) {
       })})
       .then((res) => {
         if (res.ok) {
-          res.json().then((data) => setEvents(data));
-
+          res.json().then((data) => {
+            let updatedEvents = allEvents.map(event => data.find(eve => eve.id === event.id) || event);
+            setAllEvents(updatedEvents)
+          });
         } else {
           console.log("")
         }})
