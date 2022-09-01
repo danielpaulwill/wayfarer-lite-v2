@@ -1,67 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Event from "./Event";
 
 function EventList({ goToIslandMap, location, onEventSelect }) {
-  const [allEvents, setAllEvents] = useState()
+  // const [allEvents, setAllEvents] = useState(location.events)
   const [eventsOptions, setEventsOptions] = useState()
   const [selectedEvent, setSelectedEvent] = useState()
 
-  console.log({ allEvents })
+  const allEvents = useRef(location.events)
+
+  console.log("allEvents: ",allEvents.current)
 
   // Save the events to the allEvents State
-  useEffect(() => {
-    setAllEvents(location.events)
-    }, [location])
+  // useEffect(() => {
+  //   setAllEvents(location.events)
+  //   }, [location])
 
   // Create a button for each event
   useEffect(() => {
-    let allOptions = allEvents.map((event) => (event.is_complete ? console.log("") : 
+    let allOptions = allEvents.current.map((event) => (event.is_complete ? console.log("") : 
     <div className="center" key={event.id}>
-      <button className="normalButton" value={event.id} onClick={e => onSelectedEvent(event)}>{event.name}</button>
+      <button className="normalButton" value={event.id} onClick={e => setSelectedEvent(event)}>{event.name}</button>
     </div>
   ))
     setEventsOptions(allOptions)
   }, [allEvents])
-
-  // function onSelectedEvent(event) {
-  //   // PATCH to no longer show events that have been executed
-  //   fetch(`/events/${event.id}`, {
-  //     method: 'PATCH',
-  //     // mode: 'no-cors',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       is_complete: true
-  //     })})
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         res.json().then((data) => {
-  //           let updatedEvents = allEvents.map(event => {
-  //             if (event.id === data.id) {
-  //               return {...event, is_complete: true}
-  //               // console.log("skip")
-  //             } else {
-  //               return event
-  //             }
-  //           });
-  //           setAllEvents(updatedEvents)
-  //         });
-  //       } else {
-  //         console.log("")
-  //       }})
-  //   onEventSelect(event)
-  // }
-
-
-
-
-
-
-
-  function onSelectedEvent(event) {
-    setSelectedEvent(event)
-  }
 
   useEffect(() => {
     if (selectedEvent) {
@@ -78,7 +40,7 @@ function EventList({ goToIslandMap, location, onEventSelect }) {
           if (res.ok) {
             res.json().then((data) => {
               console.log(data)
-              let updatedEvents = allEvents.map(event => {
+              let updatedEvents = allEvents.current.map(event => {
                 if (event.id === data.id) {
                   return {...event, is_complete: true}
                   // console.log("skip")
@@ -86,7 +48,7 @@ function EventList({ goToIslandMap, location, onEventSelect }) {
                   return event
                 }
               });
-              setAllEvents(updatedEvents)
+              allEvents.current = updatedEvents
             });
           } else {
             console.log("")
@@ -99,12 +61,6 @@ function EventList({ goToIslandMap, location, onEventSelect }) {
   // useEffect(() => {
   //   allEvents ? setCurrentPage(eventList) : console.log('')
   // }, [allEvents])
-
-
-
-
-
-
 
 
 
