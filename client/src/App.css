@@ -433,17 +433,18 @@
   margin-bottom: 30px;
 }
 
-/* .itemList {
+.itemList {
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 30px;
-} */
+}
 
-/* .itemImg {
+.itemImg {
   max-width: 30px;
   max-height: 30px;
-} */
+  padding-left: 8px;
+}
 
 /* .itemInfoImg {
   width: 120px;
