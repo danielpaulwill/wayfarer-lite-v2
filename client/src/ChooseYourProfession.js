@@ -57,7 +57,7 @@ function ChooseYourProfession({ handleMapView, setCharacterAttributes, professio
       .then((res) => {
         if (res.ok) {
           res.json().then((data) => setCharacterAttributes(data));
-          handleMapView()
+          // handleMapView()
         } else {
           res.json().then((err) => setAttributeError(err.errors))
         }})

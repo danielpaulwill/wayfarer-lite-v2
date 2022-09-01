@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import GameStart from "./GameStart";
 import ChooseYourCharacter from "./ChooseYourCharacter";
 import ChooseYourProfession from "./ChooseYourProfession";
+import LoadingPage from "./LoadingPage";
 
 function SetupContainer({ user, characterName, characterAvatar, handleNameChange, handleAvatarClick, handleMapView, archerAvatar, mageAvatar, warriorAvatar, professionChange, health, evil, strength, defense, luck, setCharacterAttributes, setCharacter }) {
   
   const gameStart = <GameStart handleClick={handleStartClick} characterName={characterName} characterAvatar={characterAvatar} />
   const chooseYourProfession = <ChooseYourProfession handleMapView={handleMapView} setCharacterAttributes={setCharacterAttributes} professionChange={professionChange} health={health} evil={evil} strength={strength} defense={defense} luck={luck} locationSeed={locationSeed} />
   const chooseYourCharacter = <ChooseYourCharacter onChange={handleNameChange} onClick={handleAvatarClick} characterName={characterName} characterAvatar={characterAvatar} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} professionChange={professionChange} setCharacter={setCharacter} onCharacterConfirm={onCharacterConfirm} />
-  
+  const loadingPage = <LoadingPage />
+
   const [currentPage, setCurrentPage] = useState(gameStart)
 
 
@@ -31,6 +33,7 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
 
 
   function locationSeed() {
+    setCurrentPage(loadingPage)
     // locations POST
     fetch('/locations', {
       method: 'POST',
@@ -59,7 +62,7 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
             
           }})
 
-      }, 2000);
+      }, 1000);
 
 
     setTimeout(function(){
@@ -75,10 +78,12 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
           if (res.ok) {
             console.log("Options POSTed")
           }})
-    }, 4000);
+    }, 2000);
 
 
-
+    setTimeout(function() {
+      handleMapView()
+    }, 4000)
 
   }
 

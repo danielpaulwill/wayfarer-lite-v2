@@ -1,14 +1,6 @@
 import React, { useEffect } from "react";
 
-function LoadingPage({ location, locationWorkaround }) {
-
-  useEffect(() => {
-    setTimeout(function(){
-      locationWorkaround()
-      console.log("loaded")
-      }, 1000);    
-  }, [])
-
+function LoadingPage() {
   
   return (
       <div className="center">
