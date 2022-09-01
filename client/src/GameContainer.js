@@ -121,9 +121,9 @@ function GameContainer({ user, characterName, characterAvatar, archerAvatar, mag
   //       updated_at: "2022-08-30T04:06:11.930Z"
   //     }]}]}
 
-  const eventList = <EventList location={location} onEventSelect={handleEventSelect} goToIslandMap={goToIslandMap}/>
+  const eventList = <EventList location={location} onEventSelect={handleEventSelect} goToIslandMap={goToIslandMap} />
   const chooseYourLocation = <ChooseYourLocation onLocationSelect={handleLocationSelect} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />
-  const loadingPage = <LoadingPage location={location} locationWorkaround={locationWorkaround} />
+  // const loadingPage = <LoadingPage location={location} locationWorkaround={locationWorkaround} />
 
   const [currentPage, setCurrentPage] = useState(chooseYourLocation)
 
@@ -154,12 +154,13 @@ function GameContainer({ user, characterName, characterAvatar, archerAvatar, mag
         }
         }, [selectedLocation])
 
+  // Render EventList page with the correct location
   useEffect(() => {
     location ? setCurrentPage(eventList) : console.log('')
   }, [location])
         
   function locationWorkaround() {
-    const eventList = <EventList location={location} onEventSelect={handleEventSelect} goToIslandMap={goToIslandMap}/>
+    const eventList = <EventList location={location} onEventSelect={handleEventSelect} goToIslandMap={goToIslandMap} />
     setCurrentPage(eventList)
   }
 

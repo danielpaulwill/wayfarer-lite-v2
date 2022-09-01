@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Event from "./Event";
 
-function EventList({ goToIslandMap, location, onEventSelect }) {
+function EventList({ goToIslandMap, location, onEventSelect, passEvents }) {
   const [allEvents, setAllEvents] = useState(location.events)
   const [eventsOptions, setEventsOptions] = useState()
 
@@ -20,6 +20,10 @@ function EventList({ goToIslandMap, location, onEventSelect }) {
     setEventsOptions(allOptions)
   }, [allEvents])
 
+  // useEffect(() => {
+  //   passEvents(allEvents)
+  // }, [allEvents])
+
   function onSelectedEvent(event) {
     // PATCH to no longer show events that have been executed
     fetch(`/events/${event.id}`, {
@@ -37,6 +41,7 @@ function EventList({ goToIslandMap, location, onEventSelect }) {
             let updatedEvents = allEvents.map(event => {
               if (event.id === data.id) {
                 return {...event, is_complete: true}
+                // console.log("skip")
               } else {
                 return event
               }
