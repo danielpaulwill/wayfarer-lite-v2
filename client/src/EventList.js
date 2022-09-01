@@ -8,7 +8,7 @@ function EventList({ goToIslandMap, location, onEventSelect }) {
 
   const allEvents = useRef(location.events)
 
-  console.log("allEvents: ",allEvents.current)
+  // console.log("allEvents: ",allEvents.current)
 
   // Save the events to the allEvents State
   // useEffect(() => {
@@ -39,10 +39,9 @@ function EventList({ goToIslandMap, location, onEventSelect }) {
         .then((res) => {
           if (res.ok) {
             res.json().then((data) => {
-              console.log(data)
               let updatedEvents = allEvents.current.map(event => {
                 if (event.id === data.id) {
-                  return {...event, is_complete: true}
+                  return data
                   // console.log("skip")
                 } else {
                   return event

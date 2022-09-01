@@ -1,6 +1,8 @@
 import React from "react";
 
 function OptionResult({ option, locationWorkaround }) {  
+
+  console.log({ option })
  
   return (
     <div className="center">
