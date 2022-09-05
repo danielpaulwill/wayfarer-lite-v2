@@ -17,31 +17,49 @@ function GameContainer({ user, characterName, characterAvatar, archerAvatar, mag
   const [currentPage, setCurrentPage] = useState(chooseYourLocation)
 
   function handleLocationSelect(e) {
-    setSelectedLocation(e.target.value)
+    // setSelectedLocation(e.target.value)
+    fetch('/locations-select', {
+      method: 'POST',
+      // mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: e.target.value,
+      })})
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((data) => setLocation(data));
+         } else {
+          console.log("Location failed")
+        }
+      })
   }
 
-  useEffect(() => {
-    if (selectedLocation) {
-      fetch('/locations-select', {
-        method: 'POST',
-        // mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: selectedLocation,
-        })})
-        .then((res) => {
-          if (res.ok) {
-            res.json().then((data) => setLocation(data));
-           } else {
-            console.log("Location failed")
-          }
-        })
-    } else {
-      console.log("")
-        }
-        }, [selectedLocation])
+  // useEffect(() => {
+    // console.log("Before")
+    // if (selectedLocation) {
+      // console.log("After")
+      // fetch('/locations-select', {
+      //   method: 'POST',
+      //   // mode: 'no-cors',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     name: selectedLocation,
+      //   })})
+      //   .then((res) => {
+      //     if (res.ok) {
+      //       res.json().then((data) => setLocation(data));
+      //      } else {
+      //       console.log("Location failed")
+      //     }
+      //   })
+    // } else {
+    //   console.log("")
+    //     }
+        // }, [selectedLocation])
 
   // Render EventList page with the correct location
   useEffect(() => {
