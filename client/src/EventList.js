@@ -8,6 +8,8 @@ function EventList({ goToIslandMap, location, onEventSelect }) {
 
   const allEvents = useRef(location.events)
 
+  console.log(allEvents.current)
+
   // console.log("allEvents: ",allEvents.current)
 
   // Save the events to the allEvents State
