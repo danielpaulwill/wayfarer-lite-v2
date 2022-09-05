@@ -24,14 +24,6 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
     window.scrollTo(0, 0);
   }
 
-
-//   function doTheseFirst()
-// {
-//   setTimeout(function(){ andThenDoThese(); }, 5000);
-//   // Maybe show some pictures and play some sounds for 5 seconds
-// }
-
-
   function locationSeed() {
     setCurrentPage(loadingPage)
     // locations POST
@@ -83,7 +75,7 @@ function SetupContainer({ user, characterName, characterAvatar, handleNameChange
 
     setTimeout(function() {
       handleMapView()
-    }, 4000)
+    }, 3000)
 
   }
 

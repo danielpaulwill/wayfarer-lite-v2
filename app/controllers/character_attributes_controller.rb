@@ -8,7 +8,7 @@ class CharacterAttributesController < ApplicationController
     defense = CharacterAttribute.create(character_id: user.character.id, name: "Defense", quantity: params[:defense])
     luck = CharacterAttribute.create(character_id: user.character.id, name: "Luck", quantity: params[:luck])
     if health.valid? && evil.valid? && strength.valid? && defense.valid? && luck.valid?
-      all_attributes = CharacterAttribute.all
+      all_attributes = [health, evil, strength, defense, luck]
       render json: all_attributes, status: :created
     else
       render json: { errors: "Please select a profession" }, status: :unprocessable_entity

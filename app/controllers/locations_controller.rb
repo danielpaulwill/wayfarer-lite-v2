@@ -30,4 +30,10 @@ class LocationsController < ApplicationController
     render json: location, except: [:created_at, :updated_at], include: [:events => { :include => :options }], status: :ok
   end
 
+  def select_again
+    event = Event.find_by(id: params[:event_id])
+    location = Location.find_by(id: event.location_id)
+    render json: location, except: [:created_at, :updated_at], include: [:events => { :include => :options }], status: :ok  
+  end
+
 end

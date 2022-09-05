@@ -1,16 +1,15 @@
 import React from "react";
 
-function OptionResult({ option, locationWorkaround }) {  
-
-  console.log({ option })
+function OptionResult({ option, returnToLocation }) {  
  
   return (
-    <div className="center">
+    <div className="optionsResult">
       <div>
         <h2>{option.name}</h2>
         <p>{option.description}</p>
       </div>
-      <button className="normalButton" onClick={locationWorkaround} >Return to your Adventure</button>
+      <br></br>
+      <button className="normalButton" onClick={e => returnToLocation(option)}>Return to your Adventure</button>
     </div>
   )
 };

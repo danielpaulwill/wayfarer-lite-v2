@@ -15,6 +15,36 @@ function MainContainer({ user, character, characterName, characterAvatar, handle
   const [defense, setDefense] = useState('')
   const [luck, setLuck] = useState('')
 
+  useEffect(() => {
+
+    // fetch("/me").then((res) => {
+    //   if (res.ok) {
+    //   res.json().then((user) => {
+    //     setUser(user)
+    //     setCharacter(user.character)
+    //   });
+    //   navigate('/game/play')
+    //   alert("Welcome back to Wayfarer! Please select a location to pick up where you left off");
+    // } else {
+    //   res.json().then((err) => setErrors(err.errors))
+    //   navigate('/welcome')
+    // }});
+
+    if (characterAttributes === '') {
+      console.log("Nada")
+    } else {
+      let healthAttr = characterAttributes.find(attr => attr.name === 'Health');
+      let evilAttr = characterAttributes.find(attr => attr.name === 'Evil');
+      let strengthAttr = characterAttributes.find(attr => attr.name === 'Strength');
+      let defenseAttr = characterAttributes.find(attr => attr.name === 'Defense');
+      let luckAttr = characterAttributes.find(attr => attr.name === 'Luck');
+      setHealth(healthAttr.quantity)
+      setEvil(evilAttr.quantity)
+      setStrength(strengthAttr.quantity)
+      setDefense(defenseAttr.quantity)
+      setLuck(luckAttr.quantity)
+    }
+  }, [characterAttributes])
 
   useEffect(() => {
     if (chooseProfession === '') {
