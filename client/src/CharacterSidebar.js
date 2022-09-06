@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function CharacterSidebar({ character, name, avatar, health, strength, defense, luck }) {
-
 
   return (
     <div id="characterSidebar">

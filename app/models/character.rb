@@ -1,6 +1,5 @@
 class Character < ApplicationRecord
   has_many :items
-  has_many :character_attributes
   has_many :locations
   has_many :events, through: :locations
   belongs_to :user

@@ -1,7 +1,7 @@
 class CharactersController < ApplicationController
 
   def create
-    character = Character.create(name: params[:name], avatar: params[:avatar], user_id: session[:user_id])
+    character = Character.create(name: params[:name], avatar: params[:avatar], health: params[:health], evil: params[:evil], strength: params[:strength], defense: params[:defense], luck: params[:luck], user_id: session[:user_id])
     if character.valid?
       render json: character, status: :created
     else

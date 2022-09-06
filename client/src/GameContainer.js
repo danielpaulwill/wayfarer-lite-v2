@@ -5,15 +5,13 @@ import LoadingPage from "./LoadingPage";
 import Event from "./Event";
 import OptionResult from "./OptionResult";
 
-function GameContainer({ user, characterName, characterAvatar, archerAvatar, mageAvatar, warriorAvatar }) {
+function GameContainer() {
   
   const [location, setLocation] = useState()
   const [selectedLocation, setSelectedLocation] = useState('')
 
-  console.log({ location })
-
   const eventList = <EventList location={location} onEventSelect={handleEventSelect} goToIslandMap={goToIslandMap} />
-  const chooseYourLocation = <ChooseYourLocation onLocationSelect={handleLocationSelect} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} />
+  const chooseYourLocation = <ChooseYourLocation onLocationSelect={handleLocationSelect} />
   // const loadingPage = <LoadingPage location={location} locationWorkaround={locationWorkaround} />
 
   const [currentPage, setCurrentPage] = useState(chooseYourLocation)

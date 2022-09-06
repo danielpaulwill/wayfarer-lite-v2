@@ -15,36 +15,33 @@ function MainContainer({ user, character, characterName, characterAvatar, handle
   const [defense, setDefense] = useState('')
   const [luck, setLuck] = useState('')
 
-  useEffect(() => {
+  // Set Character Attributes from ChooseYourProfession resolution
+  function handleCharacterAttributes(data) {
+    let healthAttr = data.find(attr => attr.name === 'Health');
+    let evilAttr = data.find(attr => attr.name === 'Evil');
+    let strengthAttr = data.find(attr => attr.name === 'Strength');
+    let defenseAttr = data.find(attr => attr.name === 'Defense');
+    let luckAttr = data.find(attr => attr.name === 'Luck');
+    setCharacterAttributes({
+      health: healthAttr.quantity,
+      evil: evilAttr.quantity,
+      strength: strengthAttr.quantity,
+      defense: defenseAttr.quantity,
+      luck: luckAttr.quantity
+    });
+  }
 
-    // fetch("/me").then((res) => {
-    //   if (res.ok) {
-    //   res.json().then((user) => {
-    //     setUser(user)
-    //     setCharacter(user.character)
-    //   });
-    //   navigate('/game/play')
-    //   alert("Welcome back to Wayfarer! Please select a location to pick up where you left off");
-    // } else {
-    //   res.json().then((err) => setErrors(err.errors))
-    //   navigate('/welcome')
-    // }});
+  // useEffect(() => {
+  //   if (character !== 7) {
+  //     console.log("nada")
+  //   } else {
 
-    if (characterAttributes === '') {
-      console.log("Nada")
-    } else {
-      let healthAttr = characterAttributes.find(attr => attr.name === 'Health');
-      let evilAttr = characterAttributes.find(attr => attr.name === 'Evil');
-      let strengthAttr = characterAttributes.find(attr => attr.name === 'Strength');
-      let defenseAttr = characterAttributes.find(attr => attr.name === 'Defense');
-      let luckAttr = characterAttributes.find(attr => attr.name === 'Luck');
-      setHealth(healthAttr.quantity)
-      setEvil(evilAttr.quantity)
-      setStrength(strengthAttr.quantity)
-      setDefense(defenseAttr.quantity)
-      setLuck(luckAttr.quantity)
-    }
-  }, [characterAttributes])
+  //     // setTimeout(function(){
+  //       handleCharacterAttributes(character.character_attributes)
+  //       // }, 1000);
+  //   }
+  // }, [character])
+
 
   useEffect(() => {
     if (chooseProfession === '') {
@@ -75,10 +72,10 @@ function MainContainer({ user, character, characterName, characterAvatar, handle
 
   return (
     <div id="gameContainer">
-      <CharacterSidebar character={character} avatar={characterAvatar} name={characterName} health={health} evil={evil} strength={strength} defense={defense} luck={luck} />
+      <CharacterSidebar character={character} /*avatar={characterAvatar} name={characterName}*/ health={health} evil={evil} strength={strength} defense={defense} luck={luck} />
       <Routes>
-        <Route path="setup" element={<SetupContainer user={user} handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleMapView={handleMapView} characterName={characterName} characterAvatar={characterAvatar} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} professionChange={professionChange} health={health} evil={evil} strength={strength} defense={defense} luck={luck} setCharacterAttributes={setCharacterAttributes} setCharacter={setCharacter} />} />
-        <Route path='play' element={<GameContainer characterName={characterName} characterAvatar={characterAvatar} />} />
+        <Route path="setup" element={<SetupContainer user={user} handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleMapView={handleMapView} characterName={characterName} characterAvatar={characterAvatar} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} professionChange={professionChange} health={health} evil={evil} strength={strength} defense={defense} luck={luck} /*setCharacterAttributes={handleCharacterAttributes}*/ setCharacter={setCharacter} />} />
+        <Route path='play' element={<GameContainer character={character} /*characterName={characterName} characterAvatar={characterAvatar}*/ />} />
       </Routes>
       <ItemsSidebar />
     </div>
