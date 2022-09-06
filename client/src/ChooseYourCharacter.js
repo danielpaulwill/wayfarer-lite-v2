@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function ChooseYourCharacter({ onClick, onChange, professionChange, setCurrentPage, chooseYourProfession, archerAvatar, mageAvatar, warriorAvatar, blankAvatar, setCharacter, onCharacterConfirm }) {
+function ChooseYourCharacter({ onClick, onChange, professionChange, handleStats, setCurrentPage, chooseYourProfession, archerAvatar, mageAvatar, warriorAvatar, blankAvatar, setCharacter, onCharacterConfirm }) {
 
   const [chooseCharacterName, setChooseCharacterName] = useState('')
   const [chooseCharacterAvatar, setChooseCharacterAvatar] = useState(blankAvatar)
@@ -34,6 +34,8 @@ function ChooseYourCharacter({ onClick, onChange, professionChange, setCurrentPa
       setLocalDefense(50)
       setLocalLuck(50)
     }
+
+    handleStats(setLocalHealth, setLocalEvil, setLocalStrength, setLocalDefense, setLocalLuck)
   }, [localProfession])
 
   function handleOnClick(e) {

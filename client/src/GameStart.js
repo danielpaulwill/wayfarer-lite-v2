@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function GameStart({ handleClick, characterAvatar, characterName }) {
+function GameStart({ handleClick }) {
 
   return (
       <div>

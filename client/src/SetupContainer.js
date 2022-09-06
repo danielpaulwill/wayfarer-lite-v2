@@ -4,11 +4,11 @@ import ChooseYourCharacter from "./ChooseYourCharacter";
 import ChooseYourProfession from "./ChooseYourProfession";
 import LoadingPage from "./LoadingPage";
 
-function SetupContainer({ user, characterName, characterAvatar, handleNameChange, handleAvatarClick, handleMapView, archerAvatar, mageAvatar, warriorAvatar, professionChange, health, evil, strength, defense, luck, setCharacterAttributes, setCharacter }) {
+function SetupContainer({ user, character, handleStats, characterName, characterAvatar, handleNameChange, handleAvatarClick, handleMapView, archerAvatar, mageAvatar, warriorAvatar, professionChange, health, evil, strength, defense, luck, setCharacterAttributes, setCharacter }) {
   
-  const gameStart = <GameStart handleClick={handleStartClick} characterName={characterName} characterAvatar={characterAvatar} />
+  const gameStart = <GameStart handleClick={handleStartClick} />
   const chooseYourProfession = <ChooseYourProfession handleMapView={handleMapView} /*setCharacterAttributes={setCharacterAttributes}*/ health={health} evil={evil} strength={strength} defense={defense} luck={luck} locationSeed={locationSeed} />
-  const chooseYourCharacter = <ChooseYourCharacter onChange={handleNameChange} onClick={handleAvatarClick} professionChange={professionChange} characterName={characterName} characterAvatar={characterAvatar} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} professionChange={professionChange} setCharacter={setCharacter} onCharacterConfirm={onCharacterConfirm} />
+  const chooseYourCharacter = <ChooseYourCharacter onChange={handleNameChange} onClick={handleAvatarClick} handleStats={handleStats} professionChange={professionChange} characterName={characterName} characterAvatar={characterAvatar} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} setCharacter={setCharacter} onCharacterConfirm={onCharacterConfirm} />
   const loadingPage = <LoadingPage />
 
   const [currentPage, setCurrentPage] = useState(gameStart)
