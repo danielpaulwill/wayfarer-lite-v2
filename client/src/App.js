@@ -14,7 +14,6 @@ function App() {
   // const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [errors, setErrors] = useState('');
   const [user, setUser] = useState(null);
-  const [character, setCharacter] = useState('');
     
   let navigate = useNavigate()
 
@@ -53,7 +52,6 @@ function handleMapView() {
       if (res.ok) {
         res.json().then((user) => {
           setUser(user)
-          setCharacter(user.character)
         });
         
         navigate('/game/play')
@@ -116,7 +114,7 @@ function handleMapView() {
         <Route path='welcome' element={<LandingPage handleClick={handleWelcomeClick}/>} />
         <Route path="signup" element={<Signup handleSignupClick={handleSignupClick} handleLoginClick={handleSignupLoginClick} errors={errors} />} />
         <Route path="login" element={<Login handleLoginClick={handleLoginClick} handleSignupClick={handleLoginSignupClick} setUser={setUser} errors={errors} />} />
-        <Route path="game/*" element={<MainContainer user={user} character={character} handleMapView={handleMapView} setErrors={setErrors} setCharacter={setCharacter} />} />
+        <Route path="game/*" element={<MainContainer user={user} handleMapView={handleMapView} setErrors={setErrors} />} />
       </Routes>
     </div>
   );

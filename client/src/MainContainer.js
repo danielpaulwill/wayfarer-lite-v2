@@ -5,7 +5,10 @@ import ItemsSidebar from "./ItemsSidebar";
 import SetupContainer from "./SetupContainer";
 import GameContainer from "./GameContainer";
 
-function MainContainer({ user, character, handleMapView, setErrors, setCharacter }) {
+function MainContainer({ user, handleMapView, setErrors }) {
+  const [character, setCharacter] = useState('');
+  const [characterErrors, setCharacterErrors] = useState('')
+
   const blankAvatar = require("./assets/characters/blank.png")
   const archerAvatar = require("./assets/characters/archer.png")
   const mageAvatar = require("./assets/characters/mage.png")
@@ -15,7 +18,6 @@ function MainContainer({ user, character, handleMapView, setErrors, setCharacter
   const [characterAvatar, setCharacterAvatar] = useState(blankAvatar)
   const [chosenProfession, setChosenProfession] = useState('')
 
-  console.log({ characterName, characterAvatar })
   const [setupWorkaround, setSetupWorkaround] = useState('')
 
   const [health, setHealth] = useState('')
@@ -23,16 +25,9 @@ function MainContainer({ user, character, handleMapView, setErrors, setCharacter
   const [strength, setStrength] = useState('')
   const [defense, setDefense] = useState('')
   const [luck, setLuck] = useState('')
-  
-  // useEffect(() => {
-  //   if (character.name !== '') {
-      // setName(character.name)
-  //   }
 
-  //   if (character.health !== '') {
-  //     setHealth(character.health)
-  //   }
-  // }, [character])
+  console.log({ characterErrors })
+  console.log({ characterName })
 
 
   useEffect(() => {
@@ -71,34 +66,35 @@ function MainContainer({ user, character, handleMapView, setErrors, setCharacter
   }
 
   function handleCharacterConfirm() {  
-    // fetch('/characters', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     name: chooseCharacterName,
-    //     avatar: chooseCharacterAvatar,
-    //     health: localHealth,
-    //     evil: localEvil,
-    //     strength: localStrength,
-    //     defense: localDefense,
-    //     luck: localLuck
-    //   })})
-    //   .then((res) => {
-    //     if (res.ok) {
-    //       res.json().then((data) => setCharacter(data));
-        setSetupWorkaround("confirmBegin")
-        // } else {
-        //   res.json().then((err) => setCharacterError(err.errors))
-        // }})
+    console.log({ characterName })
+    fetch('/characters', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: characterName,
+        avatar: characterAvatar,
+        health: health,
+        evil: evil,
+        strength: strength,
+        defense: defense,
+        luck: luck
+      })})
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((data) => setCharacter(data));
+          setSetupWorkaround("confirmBegin")
+        } else {
+          res.json().then((err) => setCharacterErrors(err.errors))
+        }})
   }
 
   return (
     <div id="gameContainer">
       <CharacterSidebar character={character} avatar={characterAvatar} name={characterName} health={health} evil={evil} strength={strength} defense={defense} luck={luck} />
       <Routes>
-        <Route path="setup" element={<SetupContainer user={user} handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleProfessionChange={handleProfessionChange} handleCharacterConfirm={handleCharacterConfirm} handleMapView={handleMapView} characterName={characterName} characterAvatar={characterAvatar} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} /*health={health} evil={evil} strength={strength} defense={defense} luck={luck} setCharacterAttributes={handleCharacterAttributes}*/ setCharacter={setCharacter} setupWorkaround={setupWorkaround} />} />
+        <Route path="setup" element={<SetupContainer user={user} handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleProfessionChange={handleProfessionChange} handleCharacterConfirm={handleCharacterConfirm} handleMapView={handleMapView} characterAvatar={characterAvatar} setErrors={setErrors} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} /*health={health} evil={evil} strength={strength} defense={defense} luck={luck} setCharacterAttributes={handleCharacterAttributes}*/ setCharacter={setCharacter} setupWorkaround={setupWorkaround} characterErrors={characterErrors} />} />
         <Route path='play' element={<GameContainer character={character} /*characterName={characterName} characterAvatar={characterAvatar}*/ />} />
       </Routes>
       <ItemsSidebar />
