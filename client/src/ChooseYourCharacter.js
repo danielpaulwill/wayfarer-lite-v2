@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 function ChooseYourCharacter({ handleAvatarClick, handleNameChange, handleProfessionChange, handleCharacterConfirm, setCurrentPage, chooseYourProfession, archerAvatar, mageAvatar, warriorAvatar, blankAvatar, setCharacter, characterErrors }) {
-
-  console.log({ characterErrors })
   // const [chooseCharacterName, setChooseCharacterName] = useState('')
   const [chooseCharacterAvatar, setChooseCharacterAvatar] = useState(blankAvatar)
   const [characterError, setCharacterError] = useState('')

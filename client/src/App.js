@@ -53,7 +53,6 @@ function handleMapView() {
         res.json().then((user) => {
           setUser(user)
         });
-        
         navigate('/game/play')
         window.scrollTo(0, 0);
       } else {

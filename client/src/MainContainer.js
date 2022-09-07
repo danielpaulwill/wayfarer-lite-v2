@@ -18,8 +18,6 @@ function MainContainer({ user, handleMapView, setErrors }) {
   const [characterAvatar, setCharacterAvatar] = useState('')
   const [chosenProfession, setChosenProfession] = useState('')
 
-  console.log({ character })
-
   const [setupWorkaround, setSetupWorkaround] = useState('')
 
   const [health, setHealth] = useState('')

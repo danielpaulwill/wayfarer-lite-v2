@@ -2,13 +2,11 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(username: params[:username])
-    # byebug
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
       render json: user, status: :created
     else
-      # user = User.first
-      render json: { errors: user.errors.full_messages }, status: :unauthorized
+      render json: { error: "username and password combination not found" }, status: :unauthorized
     end
   end
 
