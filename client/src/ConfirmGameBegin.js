@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function ChooseYourProfession({ handleMapView, setCharacterAttributes, locationSeed }) {
+function ConfirmGameBegin({ locationSeed }) {
  
   return (
     <div>
@@ -16,4 +16,4 @@ function ChooseYourProfession({ handleMapView, setCharacterAttributes, locationS
   )
 };
 
-export default ChooseYourProfession;
+export default ConfirmGameBegin;

@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
 
-function CharacterSidebar({ character }) {
-
-  console.log({ character })
+function CharacterSidebar({ character, avatar, name, health, evil, strength, defense, luck }) {
 
   return (
     <div id="characterSidebar">
-      <h2 style={character.name === "" ? {color: "black"} : {color: "white"}}>{character.name}</h2>
-      <img src={character.avatar} referrerPolicy="no-referrer"></img>
+      <h2 style={name === "" ? {color: "black"} : {color: "white"}}>{name}</h2>
+      <img src={avatar} referrerPolicy="no-referrer"></img>
       <div id="sidebarStats">
         <h3>Stats</h3>
-        <p>Health: {character.health}</p>
-        <div id={(character.health === '') ? "blankBar" : "healthBar"} style={{width: `${character.health}%`}}></div>
-        <p>Strength: {character.strength}</p>
-        <div id={(character.strength === '') ? "blankBar" : "strengthBar"} style={{width: `${character.strength}%`}}></div>
-        <p>Defense: {character.defense}</p>
-        <div id={(character.defense === '') ? "blankBar" : "defenseBar"} style={{width: `${character.defense}%`}}></div>
-        <p>Luck: {character.luck}</p>
-        <div id={(character.luck === '') ? "blankBar" : "luckBar"} style={{width: `${character.luck}%`}}></div>
+        <p>Health: {health}</p>
+        <div id={(health === '') ? "blankBar" : "healthBar"} style={{width: `${health}%`}}></div>
+        <p>Strength: {strength}</p>
+        <div id={(strength === '') ? "blankBar" : "strengthBar"} style={{width: `${strength}%`}}></div>
+        <p>Defense: {defense}</p>
+        <div id={(defense === '') ? "blankBar" : "defenseBar"} style={{width: `${defense}%`}}></div>
+        <p>Luck: {luck}</p>
+        <div id={(luck === '') ? "blankBar" : "luckBar"} style={{width: `${luck}%`}}></div>
       </div>
     </div>
   )

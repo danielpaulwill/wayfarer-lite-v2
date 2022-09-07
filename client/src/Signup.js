@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function Signup({ handleSignupClick, handleLoginClick, errors, onUsername, onPassword, onPasswordConfirm }) {
+function Signup({ handleSignupClick, handleLoginClick, errors, onUsername, onPassword }) {
   const [signupUsername, setUsername] = useState('')
   const [signupPassword, setPassword] = useState('')
 
@@ -18,7 +18,6 @@ function Signup({ handleSignupClick, handleLoginClick, errors, onUsername, onPas
         <br></br>
         <input className="textInput" type="password" placeholder="password" onChange={e => setPassword(e.target.value)}></input>
         <br></br>
-        {/* <input className="textInput" type="password" placeholder="confirm password" onChange={onPasswordConfirm}></input> */}
         <br></br>
         <br></br>
         <br></br>

@@ -1,82 +1,40 @@
 import React, { useEffect, useState } from "react";
 
-function ChooseYourCharacter({ onClick, onChange, professionChange, handleStats, setCurrentPage, chooseYourProfession, archerAvatar, mageAvatar, warriorAvatar, blankAvatar, setCharacter, onCharacterConfirm }) {
+function ChooseYourCharacter({ handleAvatarClick, handleNameChange, handleProfessionChange, handleCharacterConfirm, setCurrentPage, chooseYourProfession, archerAvatar, mageAvatar, warriorAvatar, blankAvatar, setCharacter }) {
 
-  const [chooseCharacterName, setChooseCharacterName] = useState('')
+  // const [chooseCharacterName, setChooseCharacterName] = useState('')
   const [chooseCharacterAvatar, setChooseCharacterAvatar] = useState(blankAvatar)
   const [characterError, setCharacterError] = useState('')
 
-  const [localProfession, setLocalProfession] = useState('')
+  // const [localProfession, setLocalProfession] = useState('')
   const [localHealth, setLocalHealth] = useState('')
   const [localEvil, setLocalEvil] = useState('')
   const [localStrength, setLocalStrength] = useState('')
   const [localDefense, setLocalDefense] = useState('')
   const [localLuck, setLocalLuck] = useState('')
 
-  useEffect(() => {
-    if (localProfession === '') {
-    } else if (localProfession === 'Firefighter') {
-      setLocalHealth(100)
-      setLocalEvil(20)
-      setLocalStrength(60)
-      setLocalDefense(30)
-      setLocalLuck(20)
-    } else if (localProfession === 'Lawyer') {
-      setLocalHealth(100)
-      setLocalEvil(80)
-      setLocalStrength(40)
-      setLocalDefense(70)
-      setLocalLuck(20)
-    } else if (localProfession === 'Engineer') {
-      setLocalHealth(100)
-      setLocalEvil(50)
-      setLocalStrength(50)
-      setLocalDefense(50)
-      setLocalLuck(50)
-    }
-
-    handleStats(setLocalHealth, setLocalEvil, setLocalStrength, setLocalDefense, setLocalLuck)
-  }, [localProfession])
-
-  function handleOnClick(e) {
-    setChooseCharacterAvatar(e.target.src)
-    onClick(e)
-  }
-
-  function handleOnChange(e) {
-    setChooseCharacterName(e.target.value.toUpperCase())
-    onChange(e)
-  }
-
-  function handleCharacterConfirm() {  
-    fetch('/characters', {
-      method: 'POST',
-      // mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: chooseCharacterName,
-        avatar: chooseCharacterAvatar,
-        health: localHealth,
-        evil: localEvil,
-        strength: localStrength,
-        defense: localDefense,
-        luck: localLuck
-      })})
-      .then((res) => {
-        if (res.ok) {
-          res.json().then((data) => setCharacter(data));
-          onCharacterConfirm()
-        } else {
-          res.json().then((err) => setCharacterError(err.errors))
-        }})
-  }
-
-  function handleProfessionChange(e) {
-    professionChange(e.target.value)
-    setLocalProfession(e.target.value)
-  }
+  // useEffect(() => {
+  //   if (localProfession === '') {
+  //   } else if (localProfession === 'Firefighter') {
+  //     setLocalHealth(100)
+  //     setLocalEvil(20)
+  //     setLocalStrength(60)
+  //     setLocalDefense(30)
+  //     setLocalLuck(20)
+  //   } else if (localProfession === 'Lawyer') {
+  //     setLocalHealth(100)
+  //     setLocalEvil(80)
+  //     setLocalStrength(40)
+  //     setLocalDefense(70)
+  //     setLocalLuck(20)
+  //   } else if (localProfession === 'Engineer') {
+  //     setLocalHealth(100)
+  //     setLocalEvil(50)
+  //     setLocalStrength(50)
+  //     setLocalDefense(50)
+  //     setLocalLuck(50)
+  //   }
+  // }, [localProfession])
 
   return (
       <div>
@@ -86,25 +44,25 @@ function ChooseYourCharacter({ onClick, onChange, professionChange, handleStats,
           type="text" 
           placeholder="Enter Name Here..." 
           className="textInput"
-          onChange={handleOnChange} >
+          onChange={e => handleNameChange(e)} >
           </input>
             <br></br>
             <h3>CHOOSE YOUR AVATAR</h3>
           <p className={(characterError === '') ? 'errors2' : 'errors1'}>{characterError}</p>
           <div className="center">
             <div className="chooseYourAvatarContainer">
-              <img className="chooseYourAvatarImg" onClick={handleOnClick} src={warriorAvatar}></img>
+              <img className="chooseYourAvatarImg" onClick={e => handleAvatarClick(e)} src={warriorAvatar}></img>
             </div>
             <div className="chooseYourAvatarContainer">
-              <img className="chooseYourAvatarImg" onClick={handleOnClick} src={archerAvatar}></img>
+              <img className="chooseYourAvatarImg" onClick={e => handleAvatarClick(e)} src={archerAvatar}></img>
             </div>
             <div className="chooseYourAvatarContainer">
-              <img className="chooseYourAvatarImg" onClick={handleOnClick} src={mageAvatar}></img>
+              <img className="chooseYourAvatarImg" onClick={e => handleAvatarClick(e)} src={mageAvatar}></img>
             </div>
           </div>
           <br></br>
           <h3>CHOOSE YOUR PROFESSION</h3>
-            <form className="container" onChange={handleProfessionChange}>
+            <form className="container" onChange={e => handleProfessionChange(e)}>
               <label className="checkmark">Firefighter
               <input type="radio" name="profession" value="Firefighter"></input>
               </label>
