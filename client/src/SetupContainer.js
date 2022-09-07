@@ -7,7 +7,7 @@ import LoadingPage from "./LoadingPage";
 function SetupContainer({ user, character, characterName, characterAvatar, handleNameChange, handleAvatarClick, handleProfessionChange, handleCharacterConfirm, handleMapView, archerAvatar, mageAvatar, warriorAvatar, health, evil, strength, defense, luck, setCharacterAttributes, setCharacter, setupWorkaround, characterErrors }) {
   
   const gameStart = <GameStart handleClick={handleStartClick} />
-  const confirmGameBegin = <ConfirmGameBegin /*setCharacterAttributes={setCharacterAttributes}*/ health={health} evil={evil} strength={strength} defense={defense} luck={luck} locationSeed={locationSeed} />
+  const confirmGameBegin = <ConfirmGameBegin locationSeed={locationSeed} />
   const chooseYourCharacter = <ChooseYourCharacter handleNameChange={handleNameChange} handleAvatarClick={handleAvatarClick} handleProfessionChange={handleProfessionChange} handleCharacterConfirm={handleCharacterConfirm} characterName={characterName} characterAvatar={characterAvatar} archerAvatar={archerAvatar} mageAvatar={mageAvatar} warriorAvatar={warriorAvatar} setCharacter={setCharacter} characterErrors={characterErrors} />
   const loadingPage = <LoadingPage />
 
@@ -21,7 +21,7 @@ function SetupContainer({ user, character, characterName, characterAvatar, handl
 
   useEffect(() => {
     if (setupWorkaround === "confirmBegin") {
-      setCurrentPage(ConfirmGameBegin)
+      setCurrentPage(confirmGameBegin)
       window.scrollTo(0, 0);
     }
   }, [setupWorkaround])

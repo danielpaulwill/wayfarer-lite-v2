@@ -15,7 +15,7 @@ function MainContainer({ user, handleMapView, setErrors }) {
   const warriorAvatar = require("./assets/characters/warrior.png")
 
   const [characterName, setCharacterName] = useState('')
-  const [characterAvatar, setCharacterAvatar] = useState(blankAvatar)
+  const [characterAvatar, setCharacterAvatar] = useState('')
   const [chosenProfession, setChosenProfession] = useState('')
 
   const [setupWorkaround, setSetupWorkaround] = useState('')
@@ -25,9 +25,6 @@ function MainContainer({ user, handleMapView, setErrors }) {
   const [strength, setStrength] = useState('')
   const [defense, setDefense] = useState('')
   const [luck, setLuck] = useState('')
-
-  console.log({ characterErrors })
-  console.log({ characterName })
 
 
   useEffect(() => {
@@ -65,21 +62,20 @@ function MainContainer({ user, handleMapView, setErrors }) {
     setChosenProfession(e.target.value)
   }
 
-  function handleCharacterConfirm() {  
-    console.log({ characterName })
+  function handleCharacterConfirm(localName, localAvatar, localHealth, localEvil, localStrength, localDefense, localLuck) {  
     fetch('/characters', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: characterName,
-        avatar: characterAvatar,
-        health: health,
-        evil: evil,
-        strength: strength,
-        defense: defense,
-        luck: luck
+        name: localName,
+        avatar: localAvatar,
+        health: localHealth,
+        evil: localEvil,
+        strength: localStrength,
+        defense: localDefense,
+        luck: localLuck
       })})
       .then((res) => {
         if (res.ok) {

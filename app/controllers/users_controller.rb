@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def show
     user = User.find_by(id: session[:user_id])
     if user
-      render json: user, except: [:created_at, :updated_at], include: [:character => { :include => :character_attributes }], status: :ok
+      render json: user, except: [:created_at, :updated_at], include: :character, status: :ok
     else
       render json: { error: "Not Authorized" }, status: :unauthorized
     end
