@@ -1,7 +1,6 @@
-# README
+# Wayfarer
 
-## Wayfarer
-##### Full game release date: July 1, 2023
+## Full game release date: July 1, 2023
 
 Welcome to Wayfarer. A multiple choice mystery RPG with some shocking twists and turns.
 
